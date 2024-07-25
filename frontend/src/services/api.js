@@ -20,6 +20,6 @@ export const getQuizzes = () => api.get('/test');
 export const getQuiz = (id) => api.get(`/test/${id}`);
 export const submitQuiz = (id, answers) => api.post(`/test/${id}/submit`, { answers });
 export const getUserResults = (userId) => api.get(`/results/user/${userId}`);
-export const getAllQuestions = () => api.get('/test/questions/all'); // Thêm API mới này
+export const getAllQuestions = () => api.get('/test'); // Thêm API mới này
 
 export default api;
