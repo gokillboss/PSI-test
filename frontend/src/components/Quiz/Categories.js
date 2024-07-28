@@ -3,7 +3,7 @@ import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import { getCategories } from '../../services/api';
 import { useNavigate } from 'react-router-dom';
 
-const Quizzes = () => {
+const Categories = () => {
   const [categories, setCategories] = useState([]);
   const navigate = useNavigate();
 
@@ -20,13 +20,13 @@ const Quizzes = () => {
     fetchCategories();
   }, []);
 
-  const handleViewTests = (id) => {
+  const handleStartCategory = (id) => {
     navigate(`/categories/${id}`);
   };
 
   return (
     <Container>
-      <h2 className="my-4">Available Quiz Categories</h2>
+      <h2 className="my-4">Available Categories</h2>
       <Row>
         {categories.map(category => (
           <Col key={category._id} md={4} className="mb-4">
@@ -36,7 +36,7 @@ const Quizzes = () => {
                 <Card.Text>{category.description}</Card.Text>
                 <Button 
                   variant="primary" 
-                  onClick={() => handleViewTests(category._id)}
+                  onClick={() => handleStartCategory(category._id)}
                 >
                   View Tests
                 </Button>
@@ -49,4 +49,4 @@ const Quizzes = () => {
   );
 };
 
-export default Quizzes;
+export default Categories;

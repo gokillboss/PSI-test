@@ -1,22 +1,22 @@
 const express = require('express');
 const router = express.Router();
-const testRoute = require('./testRoute');
-const userRoute = require('./userRoute');
-const authRoute = require('./authRoute');
-const resultRoute = require('./resultRoute');
+const testRoutes = require('./testRoute');
+const userRoutes = require('./userRoute');
+const authRoutes = require('./authRoute');
+const categoryRoutes = require('./categoryRoute');
 const authMiddleware = require('../middlewares/authMiddleware');
 
 router.get('/', (req, res) => {
-  res.send('API is working!');
+    res.send('API is working!');
 });
 
-router.use('/test', testRoute);
-router.use('/user', userRoute);
-router.use('/auth', authRoute);
-router.use('/result', resultRoute);
+router.use('/test', testRoutes);
+router.use('/user', userRoutes);
+router.use('/auth', authRoutes);
+router.use('/categories', categoryRoutes);
 
 router.get('/protected', authMiddleware, (req, res) => {
-  res.send('You are authorized to access this route!');
+    res.send('You are authorized to access this route!');
 });
 
 module.exports = router;

@@ -6,16 +6,7 @@ const multer = require('multer');
 
 const upload = multer({ dest: 'uploads/' });
 
-
-// test user route
-router.get('/', (req, res) => {
-    res.send('User route is working!');
-});
-
-
 router.get('/profile', auth, getUserProfile);
 router.post('/profile', auth, upload.single('avatar'), updateUserProfile);
-
-
 
 module.exports = router;
