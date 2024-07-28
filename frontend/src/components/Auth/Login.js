@@ -25,10 +25,10 @@ const Login = () => {
   };
 
   return (
-    <Container>
-      <Row className="justify-content-md-center">
-        <Col md="6">
-          <h2>Login</h2>
+    <Container fluid className="d-flex align-items-center justify-content-center min-vh-100">
+      <Row className="justify-content-md-center w-100">
+        <Col md="6" lg="4">
+          <h2 className="mb-4">Login</h2>
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="formEmail">
               <Form.Label>Email</Form.Label>
@@ -40,7 +40,7 @@ const Login = () => {
               />
             </Form.Group>
 
-            <Form.Group controlId="formPassword">
+            <Form.Group controlId="formPassword" className="mt-3">
               <Form.Label>Password</Form.Label>
               <Form.Control 
                 type="password" 
@@ -50,7 +50,7 @@ const Login = () => {
               />
             </Form.Group>
 
-            <Button variant="primary" type="submit">
+            <Button variant="primary" type="submit" className="mt-4">
               Login
             </Button>
           </Form>
