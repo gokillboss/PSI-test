@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema({
     lastName: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    // isAdmin: { type: Boolean, default: false },
+    avatar: { type: String, default: 'default-avatar.png' }, // Default avatar image filename
 }, {
     timestamps: true // Adds createdAt and updatedAt fields
 });

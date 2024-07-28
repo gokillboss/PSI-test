@@ -1,11 +1,11 @@
 const express = require('express');
-const { getTests, getTest, submitTest, getAllQuestions } = require('../controllers/testController');
+const { getTests, getTestById, createTest, submitTest } = require('../controllers/testController');
 const auth = require('../middlewares/authMiddleware');
 const router = express.Router();
 
-router.get('/',auth, getTests);
-router.get('/:id', auth, getTest);
-router.post('/:id/submit', auth, submitTest);
-router.get('/questions/all',auth, getAllQuestions); // Thêm route này
+router.get('/', auth, getTests); // Apply the auth middleware
+router.get('/:id', auth, getTestById); // Apply the auth middleware
+router.post('/', auth, createTest); // Apply the auth middleware
+router.post('/:id/submit', auth, submitTest); // Apply the auth middleware
 
 module.exports = router;
