@@ -1,20 +1,14 @@
 const mongoose = require('mongoose');
 
-const TestSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: true
-  },
-  description: {
-    type: String,
-    required: true
-  },
-  questions: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Question'
-    }
-  ]
+const testSchema = new mongoose.Schema({
+    title: { type: String, required: true },
+    description: { type: String, required: true },
+    category: { type: mongoose.Schema.Types.ObjectId, ref: 'Category' },
+    questions: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Question' }]
+}, {
+    timestamps: true // Adds createdAt and updatedAt fields
 });
 
-module.exports = mongoose.model('Test', TestSchema);
+const Test = mongoose.model('Test', testSchema);
+
+module.exports = Test;

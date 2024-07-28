@@ -5,13 +5,15 @@ import Register from './components/Auth/Register';
 import QuizDetail from './components/Quiz/QuizDetail';
 import AllQuestions from './components/Quiz/AllQuestions';
 import QuizResult from './components/Quiz/QuizResult';
-import HomePage from './pages/HomePage';
+import HomePage from './components/HomePage';
 import Profile from './components/Profile';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import ScrollToTopButton from './components/ScrollToTopButton';
 import Quizzes from './components/Quiz/Quizzes';
 import ProtectedRoute from './components/ProtectedRoute';
+import Categories from './components/Quiz/Categories';
+import CategoryDetail from './components/Quiz/CategoryDetail';
 import { Container } from 'react-bootstrap';
 
 const App = () => {
@@ -24,6 +26,8 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route element={<ProtectedRoute />}>
+            <Route path="/categories" element={<Categories />} />
+            <Route path="/categories/:id" element={<CategoryDetail />} />
             <Route path="/quizzes" element={<Quizzes />} />
             <Route path="/quizzes/:id" element={<QuizDetail />} />
             <Route path="/questions" element={<AllQuestions />} />
