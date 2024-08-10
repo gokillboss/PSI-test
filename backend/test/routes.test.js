@@ -3,120 +3,115 @@ const express = require('express');
 const mongoose = require('mongoose');
 const connectDB = require('../config/database');
 const User = require('../models/userModel');
-const Test = require('../models/testModel');
+const Quiz = require('../models/quizModel');
 const Question = require('../models/questionModel');
 const authRoutes = require('../routes/authRoute');
-const testRoutes = require('../routes/testRoute');
-const resultRoutes = require('../routes/resultRoute');
+const quizRoutes = require('../routes/quizRoute');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const path = require('path');
-const fs = require('fs');
 
 const app = express();
 app.use(express.json());
+
 app.use('/api/auth', authRoutes);
-app.use('/api/tests', testRoutes);
-app.use('/api/results', resultRoutes);
+app.use('/api/quizzes', quizRoutes);
 
-beforeAll(async () => {
-    await connectDB();
-    await User.deleteMany({});
-    await Test.deleteMany({});
-    await Question.deleteMany({});
-
-    // Add dummy user
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = 'password';
-    const user = new User({
-        firstName: "testuser",
-        lastName: "Ho",
-        email: 'testuser@example.com',
-        password: hashedPassword,
-        role: 'user'
-    });
-    await user.save();
-
-    // Add dummy test data
-    const testDataPath = path.join(__dirname, 'data', 'testData.json');
-    const testData = JSON.parse(fs.readFileSync(testDataPath, 'utf-8'));
-    const questions = await Question.insertMany(testData.questions.map(q => ({
-        text: q.text,
-        options: q.options
-    })));
-
-    const test = new Test({
-        title: testData.title,
-        description: testData.description,
-        questions: questions.map(q => q._id),
-        createdBy: user._id
-    });
-    await test.save();
-});
-
-afterAll(async () => {
-    await mongoose.connection.close();
-});
+let token;
 
 describe('API Tests', () => {
-    let token;
-    let userId;
-    let testId;
-    let questions;
+    beforeAll(async () => {
+        await connectDB();
+    });
 
-    it('should log in a user', async () => {
+    beforeEach(async () => {
+        await User.deleteMany({});
+        await Quiz.deleteMany({});
+        await Question.deleteMany({});
+
+        const hashedPassword = await bcrypt.hash('123456', 10);
+        const user = await User.create({
+            firstName: 'John',
+            lastName: 'Doe',
+            email: 'john@example.com',
+            password: hashedPassword
+        });
+
         const res = await request(app)
             .post('/api/auth/login')
             .send({
-                email: 'testuser@example.com',
-                password: 'password'
+                email: 'john@example.com',
+                password: '123456'
             });
-        expect(res.statusCode).toEqual(200);
-        expect(res.body).toHaveProperty('token');
+
         token = res.body.token;
-        const decoded = jwt.decode(token);
-        userId = decoded.user.id;
     });
 
-    it('should get all tests', async () => {
-        const res = await request(app).get('/api/tests');
-        expect(res.statusCode).toEqual(200);
-        expect(res.body.length).toBeGreaterThan(0);
-        testId = res.body[0]._id;  // Lấy ID của bài thi đầu tiên
-        questions = res.body[0].questions;
+    afterAll(async () => {
+        await mongoose.disconnect();
     });
 
-    it('should get test by ID', async () => {
-        const res = await request(app).get(`/api/tests/${testId}`);
-        expect(res.statusCode).toEqual(200);
-        expect(res.body).toHaveProperty('_id', testId);
+    it('should log in a user', async () => {
+        expect(token).toBeDefined();
     });
 
-    it('should submit test results', async () => {
-        const answers = questions.map((question) => ({
-            questionId: question._id,
-            selectedOption: question.options.find(option => option.isCorrect).text  // Chọn đáp án đúng cho mỗi câu hỏi
-        }));
+    it('should get all quizzes', async () => {
+        await Quiz.create({
+            title: 'Sample Quiz',
+            description: 'A test quiz',
+            questions: []
+        });
 
         const res = await request(app)
-            .post(`/api/tests/${testId}/submit`)
-            .set('x-auth-token', token)
-            .send({ answers });
-
-        if (res.statusCode !== 200) {
-            console.error('Submit test results response:', res.body);
-        }
+            .get('/api/quizzes')
+            .set('Authorization', `Bearer ${token}`);
 
         expect(res.statusCode).toEqual(200);
-        expect(res.body).toHaveProperty('result');
-        expect(res.body).toHaveProperty('score', answers.length);  // Kiểm tra điểm số
+        expect(res.body).toHaveLength(1);
     });
 
-    it('should get user results', async () => {
+    it('should get quiz by ID', async () => {
+        const quiz = await Quiz.create({
+            title: 'Sample Quiz',
+            description: 'A test quiz',
+            questions: []
+        });
+
         const res = await request(app)
-            .get(`/api/results/user/${userId}`)
-            .set('x-auth-token', token);
+            .get(`/api/quizzes/${quiz._id}`)
+            .set('Authorization', `Bearer ${token}`);
+
         expect(res.statusCode).toEqual(200);
-        expect(res.body.length).toBeGreaterThan(0);
+        expect(res.body).toHaveProperty('title', 'Sample Quiz');
+    });
+
+    it('should submit quiz results', async () => {
+        const quiz = await Quiz.create({
+            title: 'Math Quiz',
+            description: 'Basic Math Quiz',
+            questions: []
+        });
+
+        const question = await Question.create({
+            quizId: quiz._id,  // Ensure quizId is populated
+            questionText: 'What is 2 + 2?',
+            options: [
+                { text: '3', isCorrect: false },
+                { text: '4', isCorrect: true }
+            ]
+        });
+
+        quiz.questions.push(question._id);
+        await quiz.save();
+
+        const res = await request(app)
+            .post(`/api/quizzes/${quiz._id}/submit`)
+            .set('Authorization', `Bearer ${token}`)
+            .send({
+                answers: [{ questionId: question._id.toString(), selectedOption: '4' }]
+            });
+
+        expect(res.statusCode).toEqual(200);
+        expect(res.body).toHaveProperty('score', 1);
+        expect(res.body).toHaveProperty('totalQuestions', 1);
     });
 });
