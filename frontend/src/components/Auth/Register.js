@@ -8,6 +8,7 @@ const Register = () => {
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState(null); // Thêm state để quản lý lỗi
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
@@ -16,6 +17,7 @@ const Register = () => {
             await register({ firstName, lastName, email, password });
             navigate('/login');
         } catch (error) {
+            setError('Registration failed. Please try again.'); // Cập nhật thông báo lỗi
             console.error('Registration error', error);
         }
     };
@@ -25,6 +27,7 @@ const Register = () => {
             <Row className="justify-content-md-center">
                 <Col md="6">
                     <h2>Register</h2>
+                    {error && <div className="alert alert-danger">{error}</div>} {/* Hiển thị thông báo lỗi nếu có */}
                     <Form onSubmit={handleSubmit}>
                         <Form.Group controlId="formFirstName">
                             <Form.Label>First Name</Form.Label>
@@ -33,6 +36,7 @@ const Register = () => {
                                 value={firstName}
                                 onChange={(e) => setFirstName(e.target.value)}
                                 placeholder="Enter firstname"
+                                required
                             />
                         </Form.Group>
 
@@ -43,6 +47,7 @@ const Register = () => {
                                 value={lastName}
                                 onChange={(e) => setLastName(e.target.value)}
                                 placeholder="Enter lastname"
+                                required
                             />
                         </Form.Group>
 
@@ -53,6 +58,7 @@ const Register = () => {
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 placeholder="Enter email"
+                                required
                             />
                         </Form.Group>
 
@@ -63,6 +69,7 @@ const Register = () => {
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 placeholder="Password"
+                                required
                             />
                         </Form.Group>
 

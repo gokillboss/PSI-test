@@ -12,6 +12,7 @@ import Footer from './components/Footer';
 import ScrollToTopButton from './components/ScrollToTopButton';
 import Quizzes from './components/Quiz/Quizzes';
 import ProtectedRoute from './components/ProtectedRoute';
+import EmailConfirmation from './components/Auth/EmailConfirmation';
 import { Container } from 'react-bootstrap';
 
 const App = () => {
@@ -23,6 +24,7 @@ const App = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/confirm/:token" element={<EmailConfirmation />} />
           <Route element={<ProtectedRoute />}>
             <Route path="/quizzes" element={<Quizzes />} />
             <Route path="/quizzes/:id" element={<QuizDetail />} />
