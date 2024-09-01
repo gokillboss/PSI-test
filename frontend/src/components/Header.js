@@ -4,8 +4,6 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const Header = () => {
     const navigate = useNavigate();
-
-    // Function to check if the user is authenticated
     const isAuthenticated = () => {
         const token = localStorage.getItem('token');
         return !!token;  // Returns true if token exists, false otherwise
