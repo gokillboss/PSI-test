@@ -1,48 +1,48 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-const User = require('../models/userModel');  
+const User = require('../models/userModel');
 const Transaction = require('../models/transactionModel');
-const Quiz = require('../models/quizModel'); 
+const Quiz = require('../models/quizModel');
 require('dotenv').config();
 
 exports.createCheckoutSession = async (req, res) => {
     const { quizId } = req.body;
-  
+
     try {
-      const quiz = await Quiz.findById(quizId);
-  
-      if (!quiz) {
-        return res.status(404).json({ message: 'Quiz not found' });
-      }
-  
-      const session = await stripe.checkout.sessions.create({
-        payment_method_types: ['card'],
-        line_items: [{
-          price_data: {
-            currency: 'usd',
-            product_data: {
-              name: quiz.title,
+        const quiz = await Quiz.findById(quizId);
+
+        if (!quiz) {
+            return res.status(404).json({ message: 'Quiz not found' });
+        }
+
+        const session = await stripe.checkout.sessions.create({
+            payment_method_types: ['card'],
+            line_items: [{
+                price_data: {
+                    currency: 'usd',
+                    product_data: {
+                        name: quiz.title,
+                    },
+                    unit_amount: quiz.price * 100, // Stripe expects the amount in cents
+                },
+                quantity: 1,
+            }],
+            mode: 'payment',
+            success_url: `${process.env.CLIENT_URL}/payment/success?session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: `${process.env.CLIENT_URL}/quizzes`,
+            metadata: {
+                userId: req.user.id, // Attach the user ID to the metadata
+                quizId: quizId,
             },
-            unit_amount: quiz.price * 100, // Stripe expects the amount in cents
-          },
-          quantity: 1,
-        }],
-        mode: 'payment',
-        success_url: `${process.env.CLIENT_URL}/payment/success?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${process.env.CLIENT_URL}/payment/quizzes`,
-        metadata: {
-            userId: req.user.id, // Attach the user ID to the metadata
-            quizId: quizId,
-        },
-      });
-  
-      res.status(200).json({ sessionId: session.id });
+        });
+
+        res.status(200).json({ sessionId: session.id });
     } catch (error) {
-      console.error('Error creating checkout session:', error.message);
-      res.status(500).json({ message: 'Server error creating checkout session' });
+        console.error('Error creating checkout session:', error.message);
+        res.status(500).json({ message: 'Server error creating checkout session' });
     }
-  };
-  
-  
+};
+
+
 
 
 

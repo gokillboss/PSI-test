@@ -25,10 +25,32 @@ exports.signup = async (req, res) => {
         const url = `http://localhost:${process.env.PORT}/api/auth/confirm/${emailToken}`;
 
         // Gửi email xác thực
+        console.log('Sending email...' + email);
         await transporter.sendMail({
+            from: process.env.EMAIL_USER,
             to: email,
-            subject: 'Xác nhận đăng ký tài khoản',
-            html: `Bấm vào liên kết sau để xác nhận tài khoản của bạn: <a href="${url}">${url}</a>`,
+            subject: 'Xác nhận đăng ký tài khoản - Your Company Name',
+            html: `
+                <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+                    <h2 style="color: #007BFF;">Chào ${firstName} ${lastName},</h2>
+                    <p>Cảm ơn bạn đã đăng ký tài khoản tại <strong>Your Company Name</strong>!</p>
+                    <p>Vui lòng nhấp vào nút bên dưới để xác nhận địa chỉ email của bạn và hoàn tất quá trình đăng ký.</p>
+                    <div style="text-align: center; margin: 20px 0;">
+                        <a href="${url}" style="background-color: #007BFF; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Xác nhận Email</a>
+                    </div>
+                    <p>Nếu bạn không thực hiện yêu cầu này, bạn có thể bỏ qua email này.</p>
+                    <p>Nếu bạn gặp bất kỳ vấn đề gì, hãy liên hệ với đội ngũ hỗ trợ của chúng tôi qua email <a href="mailto:support@yourcompany.com">support@yourcompany.com</a>.</p>
+                    <br>
+                    <p>Trân trọng,</p>
+                    <p><strong>Đội ngũ Your Company Name</strong></p>
+                </div>
+            `
+        }, (error, info) => {
+            if (error) {
+                console.error('Error sending test email:', error);
+            } else {
+                console.log('Test email sent:', info.response);
+            }
         });
 
         // Tạo người dùng mới với trạng thái chưa xác thực
@@ -38,7 +60,7 @@ exports.signup = async (req, res) => {
             email,
             password: hashedPassword,
             phoneNumber,
-            isVerified: false 
+            isVerified: false
         });
 
         await user.save();
@@ -79,7 +101,7 @@ exports.confirmEmail = async (req, res) => {
 exports.login = async (req, res) => {
     const { email, password } = req.body;
     try {
-       
+
         const user = await User.findOne({ email });
         if (!user) {
             return res.status(400).json({ message: 'User not found' });
