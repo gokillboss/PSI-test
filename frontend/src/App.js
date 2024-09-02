@@ -12,30 +12,34 @@ import Footer from './components/Footer';
 import ScrollToTopButton from './components/ScrollToTopButton';
 import Quizzes from './components/Quiz/Quizzes';
 import ProtectedRoute from './components/ProtectedRoute';
+import EmailConfirmation from './components/Auth/EmailConfirmation';
 import { Container } from 'react-bootstrap';
-
+import PaymentSuccessPage from './pages/PaymentSuccessPage';
 const App = () => {
-  return (
-    <>
-      <Header />
-      <Container className="flex-grow-1 mt-3">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route element={<ProtectedRoute />}>
-            <Route path="/quizzes" element={<Quizzes />} />
-            <Route path="/quizzes/:id" element={<QuizDetail />} />
-            <Route path="/questions" element={<AllQuestions />} />
-            <Route path="/results/:id" element={<QuizResult />} />
-            <Route path="/profile" element={<Profile />} />
-          </Route>
-        </Routes>
-      </Container>
-      <Footer />
-      <ScrollToTopButton />
-    </>
-  );
+    return (
+        <>
+            <Header />
+            <Container className="flex-grow-1 mt-3">
+                <Routes>
+
+                    <Route path="/" element={<HomePage />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/confirm/:token" element={<EmailConfirmation />} />
+                    <Route element={<ProtectedRoute />}>
+                        <Route path="/quizzes" element={<Quizzes />} />
+                        <Route path="/quizzes/:id" element={<QuizDetail />} />
+                        <Route path="/questions" element={<AllQuestions />} />
+                        <Route path="/results/:id" element={<QuizResult />} />
+                        <Route path="/profile" element={<Profile />} />
+                        <Route path="/payment/success" element={<PaymentSuccessPage />}/>
+                    </Route>
+                </Routes>
+            </Container>
+            <Footer />
+            <ScrollToTopButton />
+        </>
+    );
 };
 
 export default App;

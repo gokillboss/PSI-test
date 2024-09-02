@@ -4,7 +4,12 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const Header = () => {
     const navigate = useNavigate();
-    const isAuthenticated = !!localStorage.getItem('token');
+
+    // Function to check if the user is authenticated
+    const isAuthenticated = () => {
+        const token = localStorage.getItem('token');
+        return !!token;  // Returns true if token exists, false otherwise
+    };
 
     const handleLogout = () => {
         localStorage.removeItem('token');
@@ -18,7 +23,7 @@ const Header = () => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ml-auto">
-                        {isAuthenticated ? (
+                        {isAuthenticated() ? (
                             <>
                                 <Nav.Link as={Link} to="/quizzes">Quizzes</Nav.Link>
                                 <Nav.Link as={Link} to="/profile">Profile</Nav.Link>
@@ -29,12 +34,9 @@ const Header = () => {
                                 <Nav.Link as={Link} to="/login">Login</Nav.Link>
                                 <Nav.Link as={Link} to="/register">Sign Up</Nav.Link>
                             </>
-                        )
-                        }
+                        )}
                     </Nav>
-
                 </Navbar.Collapse>
-
             </Container>
         </Navbar>
     );
