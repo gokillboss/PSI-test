@@ -5,7 +5,6 @@ import nailExamImage from '../assets/nail-exam.jpg';
 const HomePage = () => {
     return (
         <>
-
             <Container>
                 <Row className="justify-content-md-center my-5">
                     <Col md="8">
@@ -35,12 +34,14 @@ const HomePage = () => {
                                 <Card.Title>How We Help You Succeed</Card.Title>
                                 <Card.Text>
                                     Our website provides:
-                                    <ul>
-                                        <li>Extensive practice questions with detailed explanations</li>
-                                        <li>Timed mock exams to simulate the real exam environment</li>
-                                        <li>Study tips and strategies to enhance your preparation</li>
-                                        <li>Supportive community forums to connect with other exam takers</li>
-                                    </ul>
+                                </Card.Text>
+                                <ul>
+                                    <li>Extensive practice questions with detailed explanations</li>
+                                    <li>Timed mock exams to simulate the real exam environment</li>
+                                    <li>Study tips and strategies to enhance your preparation</li>
+                                    <li>Supportive community forums to connect with other exam takers</li>
+                                </ul>
+                                <Card.Text>
                                     Join us today and take the first step towards your successful nail certification!
                                 </Card.Text>
                             </Card.Body>
@@ -49,7 +50,6 @@ const HomePage = () => {
                 </Row>
             </Container>
         </>
-
     );
 };
 

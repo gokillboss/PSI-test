@@ -6,15 +6,16 @@ const Profile = () => {
   const [profile, setProfile] = useState({});
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [avatar, setAvatar] = useState(null);
+  //const [avatar, setAvatar] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
+    
     const fetchProfile = async () => {
       try {
         const res = await getUserProfile();
         setProfile(res.data);
-        setFirstName(res.data.firstName);
+        //setFirstName(res.data.firstName);
         setLastName(res.data.lastName);
       } catch (error) {
         console.error('Error fetching profile', error);
@@ -29,9 +30,9 @@ const Profile = () => {
     const formData = new FormData();
     formData.append('firstName', firstName);
     formData.append('lastName', lastName);
-    if (avatar) {
-      formData.append('avatar', avatar);
-    }
+    // if (avatar) {
+    //   formData.append('avatar', avatar);
+    // }
 
     try {
       const res = await updateUserProfile(formData);
@@ -74,7 +75,7 @@ const Profile = () => {
                     <Form.Label>Avatar</Form.Label>
                     <Form.Control 
                       type="file" 
-                      onChange={(e) => setAvatar(e.target.files[0])} 
+                    //   onChange={(e) => setAvatar(e.target.files[0])} 
                     />
                     {profile.avatar && (
                       <div>
