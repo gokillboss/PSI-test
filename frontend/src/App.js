@@ -15,6 +15,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import EmailConfirmation from './components/Auth/EmailConfirmation';
 import { Container } from 'react-bootstrap';
 import PaymentSuccessPage from './pages/PaymentSuccessPage';
+
 const App = () => {
     return (
         <>
@@ -32,7 +33,7 @@ const App = () => {
                         <Route path="/questions" element={<AllQuestions />} />
                         <Route path="/results/:id" element={<QuizResult />} />
                         <Route path="/profile" element={<Profile />} />
-                        <Route path="/payment/success" element={<PaymentSuccessPage />}/>
+                        <Route path="/payment/success" element={<PaymentSuccessPage />} />
                     </Route>
                 </Routes>
             </Container>

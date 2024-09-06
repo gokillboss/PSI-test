@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import { FaArrowUp } from 'react-icons/fa';
-import './ScrollToTopButton.css'; // Create a CSS file for custom styles
-
+import './ScrollToTopButton.css'; 
 const ScrollToTopButton = () => {
   const [isVisible, setIsVisible] = useState(false);
 

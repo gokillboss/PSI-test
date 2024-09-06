@@ -16,8 +16,8 @@ const PaymentSuccessPage = () => {
         if (sessionId) {
 
             console.log("Payment successful! Session ID:", sessionId);
-            
-               
+
+
         }
     }, []);
 

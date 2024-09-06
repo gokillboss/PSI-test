@@ -36,6 +36,7 @@ export const getUserResults = (userId) => api.get(`/result/user/${userId}`);
 export const getAllQuestions = () => api.get('/test/questions/all');
 
 
+//Payment
 export const checkQuizPurchase = async (quizId) => {
     try {
         const response = await api.get(`/payment/check-purchase?quizId=${quizId}`);

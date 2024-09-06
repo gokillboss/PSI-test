@@ -22,9 +22,6 @@ const Footer = () => {
                 <a href="/quizzes" className="text-dark">Quizzes</a>
               </li>
               <li>
-                <a href="/questions" className="text-dark">All Questions</a>
-              </li>
-              <li>
                 <a href="/login" className="text-dark">Login</a>
               </li>
               <li>

@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { getQuiz, submitQuiz } from '../../services/api';
 
 
-// Utility function to shuffle options
+
 const shuffleArray = (array) => {
     return array.sort(() => Math.random() - 0.5);
 };

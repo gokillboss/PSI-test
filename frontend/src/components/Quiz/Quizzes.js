@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import { loadStripe } from '@stripe/stripe-js';
 
 
-//require('dotenv').config(); // Add this line to load environment variables from .env file
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
 const createCheckoutSession = require('../../services/api').createCheckoutSession;
@@ -43,17 +42,17 @@ const Quizzes = () => {
     };
 
     const handlePayment = async (id) => {
-       
+
         try {
-            
-            const response = await createCheckoutSession(id); 
-            const { sessionId } = response; 
+
+            const response = await createCheckoutSession(id);
+            const { sessionId } = response;
             const stripe = await stripePromise;
             const { error } = await stripe.redirectToCheckout({ sessionId });
 
             if (!error) {
                 console.log('Redirected to Stripe checkout');
-              
+
             } else {
                 console.error('Stripe checkout failed', error);
             }
@@ -65,7 +64,7 @@ const Quizzes = () => {
 
     return (
         <Container>
-           
+
 
             <h2 className="my-4">Available Quizzes</h2>
             <Row>
