@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const quizSchema = new Schema({
     title: { 
         type: String, 
-        required: [true, 'Title is required'],  // Yêu cầu trường title
+        required: [true, 'Title is required'], 
         trim: true,  // Loại bỏ khoảng trắng dư thừa
         minlength: [3, 'Title must be at least 3 characters long']  // Đảm bảo độ dài tối thiểu
     },

@@ -9,13 +9,11 @@ require('dotenv').config();
 exports.signup = async (req, res) => {
     const { firstName, lastName, email, password, phoneNumber } = req.body;
     try {
-        // Kiểm tra xem người dùng đã tồn tại chưa
         let user = await User.findOne({ email });
         if (user) {
             return res.status(400).json({ message: 'User already exists' });
         }
 
-        // Hash mật khẩu trước khi lưu
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
 
@@ -45,6 +43,7 @@ exports.signup = async (req, res) => {
                     <p><strong>Đội ngũ Your Company Name</strong></p>
                 </div>
             `
+            
         }, (error, info) => {
             if (error) {
                 console.error('Error sending test email:', error);

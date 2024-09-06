@@ -7,7 +7,7 @@ const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });
 
 
-// test user route
+
 router.get('/', (req, res) => {
     res.send('User route is working!');
 });

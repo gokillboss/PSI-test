@@ -16,21 +16,16 @@ app.use(morgan('dev'));
 // MongoDB connection
 connectDB();
 
-// Serve static files for avatars
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-
-// Routes
+// Đọc web hook trước khi đọc json
 app.use('/api/payment/webhook', express.raw({ type: 'application/json' }));
 app.use(bodyParser.json());
+
+
+// Routes
 const apiRoutes = require('./routes/index');
 app.use('/api', apiRoutes);
 
 
-
-// Home Route for testing
-app.get('/', (req, res) => {
-  res.send('API is running...');
-});
 
 // Error handling middleware
 app.use((err, req, res, next) => {
@@ -39,7 +34,6 @@ app.use((err, req, res, next) => {
 });
 
 
-//app.use('/payment/webhook', express.raw({ type: 'application/json' }));
 
 // Server
 const PORT = process.env.PORT || 5000;
