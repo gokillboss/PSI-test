@@ -44,7 +44,7 @@ exports.signup = async (req, res) => {
                     <p><strong>Đội ngũ Your Company Name</strong></p>
                 </div>
             `
-            
+
         }, (error, info) => {
             if (error) {
                 console.error('Error sending test email:', error);
@@ -134,26 +134,62 @@ exports.login = async (req, res) => {
 };
 
 
+
 exports.findPassword = async (req, res) => {
     const { email } = req.body;
-    console.log('Received email for password reset:', email); // Log the email received
+    console.log('Received email for password reset:', email);
 
     try {
+        // Find user by email
         const user = await User.findOne({ email });
         if (!user) {
             console.log('User not found');
-            return res.status(404).json({ success: false, message: 'Không tìm thấy tài khoản' });
+            return res.status(404).json({ success: false, message: 'Không tìm thấy tài khoản với email đã cung cấp.' });
         }
 
-        console.log('User found:', user); // Log the user found in the database
+        console.log('User found:', user);
 
-        // Your logic for generating the reset token and sending the email goes here
+        // Generate JWT for password reset
+        const resetToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' }); // Token valid for 1 hour
 
+        // Send reset email
+       
+       
+
+        const resetUrl = `${process.env.CLIENT_URL}/resetPassword/${resetToken}`;
+        const message = `
+        <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+            <h1>Yêu cầu đặt lại mật khẩu</h1>
+            <p>Bạn đã yêu cầu đặt lại mật khẩu. Vui lòng nhấn vào liên kết bên dưới để đặt lại mật khẩu:</p>
+            <p><a href="${resetUrl}" style="background-color: #007BFF; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Đặt lại mật khẩu</a></p>
+            <p>Liên kết sẽ hết hạn trong 1 giờ.</p>
+            <p>Nếu bạn không yêu cầu đặt lại mật khẩu, hãy bỏ qua email này.</p>
+            <p>Trân trọng,</p>
+            <p>Đội ngũ hỗ trợ - Your Company Name</p>
+        </div>
+    `;
+
+        try {
+            await transporter.sendMail({
+                from: process.env.EMAIL_USER,
+                to: user.email,
+                subject: 'Yêu cầu đặt lại mật khẩu - Your Company Name',
+                html: message,
+            });
+
+            res.status(200).json({ success: true, message: 'Email đặt lại mật khẩu đã được gửi. Vui lòng kiểm tra hộp thư.' });
+        } catch (error) {
+            console.error('Error sending reset email:', error);
+            return res.status(500).json({ success: false, message: 'Đã xảy ra lỗi khi gửi email. Vui lòng thử lại.' });
+        }
     } catch (error) {
-        console.error('Error in findPassword:', error); // Log any error caught
+        console.error('Error in findPassword:', error);
         return res.status(500).json({ success: false, message: 'Đã xảy ra lỗi. Vui lòng thử lại.' });
     }
 };
+
+
+
 
 
 
@@ -162,22 +198,27 @@ exports.resetPassword = async (req, res) => {
     const { password } = req.body;
 
     try {
-        const user = await User.findOne({
-            resetPasswordToken: token,
-            resetPasswordExpire: { $gt: Date.now() }
-        });
+        // Verify the token
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
+        // Find the user by ID from the decoded token
+        const user = await User.findById(decoded.id);
         if (!user) {
             return res.status(400).json({ message: 'Token không hợp lệ hoặc đã hết hạn' });
         }
 
+        // Hash the new password
         user.password = await bcrypt.hash(password, 12);
-        user.resetPasswordToken = undefined;
-        user.resetPasswordExpire = undefined;
+
+        // Save the updated user password
         await user.save();
 
         res.status(200).json({ message: 'Mật khẩu đã được cập nhật thành công.' });
     } catch (error) {
+        if (error.name === 'TokenExpiredError') {
+            return res.status(400).json({ message: 'Token đã hết hạn.' });
+        }
+        console.error('Error resetting password:', error);
         res.status(500).json({ message: 'Đã xảy ra lỗi. Vui lòng thử lại.' });
     }
 };

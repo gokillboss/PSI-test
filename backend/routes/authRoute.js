@@ -1,18 +1,19 @@
 const express = require('express');
 const router = express.Router();
-const { confirmEmail} = require('../controllers/authController');
-
+const resetPasswordLimiter = require('../middlewares/rateLimit').resetPasswordLimiter;
+const loginLimiter = require('../middlewares/rateLimit').loginLimiter;
+const signupLimiter = require('../middlewares/rateLimit').signupLimiter;
+const { signup, login, findPassword, resetPassword,confirmEmail } = require('../controllers/authController');
 
 router.get('/', (req, res) => {
     res.send('Auth route is working!');
 });
 
-const { signup, login, findPassword, resetPassword } = require('../controllers/authController');
 
-router.post('/signup', signup);
-router.post('/login', login);
+router.post('/signup',signupLimiter, signup);
+router.post('/login',loginLimiter, login);
 router.get('/confirm/:token', confirmEmail);
-router.post('/findPassword', findPassword);
-router.post('/resetPassword', resetPassword);
+router.post('/findPassword', resetPasswordLimiter,findPassword);
+router.post('/resetPassword/:token', resetPassword);
 
 module.exports = router;

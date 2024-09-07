@@ -8,20 +8,40 @@ const ResetPassword = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [successMessage, setSuccessMessage] = useState(null);
     const [errorMessage, setErrorMessage] = useState(null);
+    const [passwordError, setPasswordError] = useState(null); // Để kiểm tra độ mạnh của mật khẩu
     const { token } = useParams();
     const navigate = useNavigate();
 
+    // Kiểm tra độ mạnh của mật khẩu (ít nhất 8 ký tự)
+    const validatePassword = (password) => {
+        if (password.length < 8) {
+            setPasswordError('Mật khẩu phải có ít nhất 8 ký tự.');
+            return false;
+        }
+        setPasswordError(null);
+        return true;
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+        
+        // Kiểm tra nếu mật khẩu không khớp
         if (password !== confirmPassword) {
             setErrorMessage('Mật khẩu không khớp.');
             return;
         }
+
+        // Kiểm tra độ mạnh của mật khẩu
+        if (!validatePassword(password)) {
+            setErrorMessage(null);
+            return;
+        }
+
         try {
             await resetPassword(token, { password });
             setSuccessMessage('Mật khẩu đã được cập nhật.');
             setErrorMessage(null);
-            setTimeout(() => navigate('/login'), 3000); // Chuyển hướng về trang đăng nhập
+            setTimeout(() => navigate('/login'), 3000); // Chuyển hướng về trang đăng nhập sau 3 giây
         } catch (error) {
             setErrorMessage('Có lỗi xảy ra. Vui lòng thử lại.');
             setSuccessMessage(null);
@@ -35,6 +55,7 @@ const ResetPassword = () => {
                     <h2 className="text-center mb-4">Đặt lại mật khẩu</h2>
                     {successMessage && <Alert variant="success">{successMessage}</Alert>}
                     {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
+                    {passwordError && <Alert variant="danger">{passwordError}</Alert>} {/* Hiển thị lỗi mật khẩu không đủ mạnh */}
                     <Form onSubmit={handleSubmit}>
                         <Form.Group controlId="formPassword" className="mb-3">
                             <Form.Control
