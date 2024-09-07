@@ -1,0 +1,38 @@
+.register-container {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.register-card {
+    background: #f8f9fa;
+    border-radius: 15px;
+}
+
+.register-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: #343a40;
+}
+
+.register-btn {
+    background-color: #007bff;
+    border: none;
+    padding: 10px;
+    font-size: 18px;
+}
+
+.register-btn:hover {
+    background-color: #0056b3;
+}
+
+input.form-control {
+    height: 45px;
+    padding-left: 15px;
+    font-size: 16px;
+    border: 1px solid #ced4da;
+}
+
+input.form-control:focus {
+    border-color: #007bff;
+    box-shadow: none;
+}

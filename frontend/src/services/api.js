@@ -21,6 +21,10 @@ api.interceptors.request.use(config => {
 export const register = (userData) => api.post('/auth/signup', userData);
 export const confirmEmail = (token) => api.get(`/auth/confirm/${token}`);
 export const login = (userData) => api.post('/auth/login', userData);
+export const findPassword = (email) => api.post('/auth/findPassword', email);
+export const resetPassword = (token, passwordData) => api.post(`/auth/resetPassword/${token}`, passwordData);
+
+
 
 // User
 export const getUserProfile = () => api.get('/user/profile');
@@ -34,5 +38,7 @@ export const submitQuiz = (id, answers) => api.post(`/test/${id}/submit`, { answ
 // Results
 export const getUserResults = (userId) => api.get(`/result/user/${userId}`);
 export const getAllQuestions = () => api.get('/test/questions/all');
+
+
 
 export default api;

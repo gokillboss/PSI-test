@@ -1,6 +1,7 @@
 const User = require('../models/userModel');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
 
 exports.signup = async (req, res) => {
     const { firstName, lastName, email, password, phoneNumber } = req.body;
@@ -62,5 +63,54 @@ exports.login = async (req, res) => {
     } catch (err) {
         console.error('Error logging in user:', err.message);
         res.status(500).json({ message: 'Server Error' });
+    }
+};
+
+
+exports.findPassword = async (req, res) => {
+    const { email } = req.body;
+    console.log('Received email for password reset:', email); // Log the email received
+
+    try {
+        const user = await User.findOne({ email });
+        if (!user) {
+            console.log('User not found');
+            return res.status(404).json({ success: false, message: 'Không tìm thấy tài khoản' });
+        }
+
+        console.log('User found:', user); // Log the user found in the database
+
+        // Your logic for generating the reset token and sending the email goes here
+
+    } catch (error) {
+        console.error('Error in findPassword:', error); // Log any error caught
+        return res.status(500).json({ success: false, message: 'Đã xảy ra lỗi. Vui lòng thử lại.' });
+    }
+};
+
+
+
+exports.resetPassword = async (req, res) => {
+    const { token } = req.params;
+    const { password } = req.body;
+
+    try {
+        const user = await User.findOne({
+            resetPasswordToken: token,
+            resetPasswordExpire: { $gt: Date.now() }
+        });
+
+        if (!user) {
+            return res.status(400).json({ message: 'Token không hợp lệ hoặc đã hết hạn' });
+        }
+
+        user.password = await bcrypt.hash(password, 12);
+        user.resetPasswordToken = undefined;
+        user.resetPasswordExpire = undefined;
+        await user.save();
+
+        res.status(200).json({ message: 'Mật khẩu đã được cập nhật thành công.' });
+    } catch (error) {
+        res.status(500).json({ message: 'Đã xảy ra lỗi. Vui lòng thử lại.' });
     }
 };
