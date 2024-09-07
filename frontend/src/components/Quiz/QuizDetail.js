@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Container, Row, Col, Button, Form, Alert } from 'react-bootstrap';
-import { getQuiz, submitQuiz } from '../../services/api';
 import { useNavigate } from 'react-router-dom';
+import { getQuiz, submitQuiz } from '../../services/api';
 
-// Utility function to shuffle options
+
+
 const shuffleArray = (array) => {
     return array.sort(() => Math.random() - 0.5);
 };

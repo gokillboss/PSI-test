@@ -3,6 +3,7 @@ const router = express.Router();
 const testRoute = require('./quizRoute');
 const userRoute = require('./userRoute');
 const authRoute = require('./authRoute');
+const paymentRoute = require('./paymentRoute');
 
 const authMiddleware = require('../middlewares/authMiddleware');
 
@@ -13,6 +14,8 @@ router.get('/', (req, res) => {
 router.use('/test', testRoute);
 router.use('/user', userRoute);
 router.use('/auth', authRoute);
+router.use('/payment', paymentRoute);
+
 
 
 router.get('/protected', authMiddleware, (req, res) => {

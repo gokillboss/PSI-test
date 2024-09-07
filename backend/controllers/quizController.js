@@ -1,6 +1,10 @@
 const Quiz = require('../models/quizModel');
 const Question = require('../models/questionModel');
 
+
+
+
+
 exports.getTests = async (req, res) => {
   try {
     const quizzes = await Quiz.find().populate('questions', 'questionText');
@@ -10,6 +14,10 @@ exports.getTests = async (req, res) => {
     res.status(500).json({ message: 'Server Error' });
   }
 };
+
+
+
+
 
 exports.getTestById = async (req, res) => {
   try {
@@ -23,6 +31,10 @@ exports.getTestById = async (req, res) => {
     res.status(500).json({ message: 'Server Error' });
   }
 };
+
+
+
+
 
 exports.createTest = async (req, res) => {
   const { title, description, questions } = req.body;
@@ -40,6 +52,10 @@ exports.createTest = async (req, res) => {
     res.status(500).json({ message: 'Server Error' });
   }
 };
+
+
+
+
 
 exports.submitTest = async (req, res) => {
   const { answers } = req.body;
@@ -73,3 +89,5 @@ exports.submitTest = async (req, res) => {
     res.status(500).json({ message: 'Server Error' });
   }
 };
+
+

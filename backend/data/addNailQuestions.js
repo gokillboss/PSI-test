@@ -1,26 +1,32 @@
-
 const mongoose = require('mongoose');
-const connectDB = require('./config/database');
-const Quiz = require('./models/quizModel');
-const Question = require('./models/questionModel');
+
+const Quiz = require('../models/quizModel');
+const Question = require('../models/questionModel');
+
+
+
+const connectDB = async () => {
+
+    const uri = 'mongodb://127.0.0.1:27017/PSI_test'; // Your MongoDB URI
+    try {
+        const conn = await mongoose.connect(uri);
+        console.log(`MongoDB Connected: ${conn.connection.host}`);
+    } catch (error) {
+        console.error(`Error: ${error.message}`);
+        process.exit(1);
+    }
+    
+};
+
+
 
 const createNailExam = async () => {
     try {
-        // Connect to the database
         await connectDB();
 
-        // Clear existing Nail Exam quiz if it exists
-        await Quiz.deleteMany({ title: 'Nail Exam' });
+        // Ensure nailQuestions is not undefined
 
-        // Create the Nail Exam quiz
-        const nailExamQuiz = await Quiz.create({
-            title: 'Nail Exam',
-            description: 'A quiz on nail theory and practice',
-            isPaid: false
-        });
-
-        // Define the questions (based on the extracted text)
-        const questions = [
+        const nailQuestions = [
             {
                 questionText: 'Những loại nào sau đây tượng trưng cho thuốc tẩy trùng?',
                 options: [
@@ -30,7 +36,7 @@ const createNailExam = async () => {
                     { text: 'Xà phòng khử trùng', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Chăm sóc móng tay cơ bản, bước tiếp theo định hình móng là gì?',
@@ -41,7 +47,7 @@ const createNailExam = async () => {
                     { text: 'Làm mềm phần da quanh móng', isCorrect: true }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Ở giai đoạn phát triển nhất tình trạng nhiễm khuẩn trên nền móng sẽ giống như:',
@@ -52,7 +58,7 @@ const createNailExam = async () => {
                     { text: 'Màu đỏ', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Để ngăn không bị tách sơn ra từng lớp quý vị nên sử dụng:',
@@ -63,7 +69,7 @@ const createNailExam = async () => {
                     { text: 'Lớp xi ngắn', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Nên tránh làm gì trong vòng 24 - 48 giờ trước khi chăm sóc móng chân:',
@@ -74,7 +80,7 @@ const createNailExam = async () => {
                     { text: 'Tỉa móng chân', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Nên làm gì trước tiên nếu khách hàng bị cắt chân trong khi làm dịch vụ?',
@@ -85,7 +91,7 @@ const createNailExam = async () => {
                     { text: 'Lấy các mảnh vụn và da thừa', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Tất cả các dụng cụ đã được khử trùng, phải được bảo quản?',
@@ -96,10 +102,10 @@ const createNailExam = async () => {
                     { text: 'Khử trùng với nước', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             //
-
+        
             {
                 questionText: 'Trong khi ngâm chân, làm móng chân của khách hàng từ 5 - 10 phút để:',
                 options: [
@@ -109,7 +115,7 @@ const createNailExam = async () => {
                     { text: 'Kích thích tuần hoàn', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Dùng các chất hoá học để tiêu diệt mầm bệnh gọi là:',
@@ -120,7 +126,7 @@ const createNailExam = async () => {
                     { text: 'Tiệt trùng', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Trước khi phục vụ khách hàng, người thợ hành nghề được cấp phép rửa tay bằng gì?',
@@ -131,7 +137,7 @@ const createNailExam = async () => {
                     { text: 'Dung dịch EPA và nước', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Người hành nghề được cấp bảng SDS ở đâu?',
@@ -142,7 +148,7 @@ const createNailExam = async () => {
                     { text: 'Nhà sản xuất hoặc nhà phân phối', isCorrect: true }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Có 2 loại miễn dịch là tự nhiên và:',
@@ -153,7 +159,7 @@ const createNailExam = async () => {
                     { text: 'Nhân tạo', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Bất kỳ vật dụng nào không thể làm sạch được sau khi sử dụng cho mỗi khách hàng đều phải được:',
@@ -164,10 +170,10 @@ const createNailExam = async () => {
                     { text: 'Được vứt bỏ', isCorrect: true }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             //
-
+        
             {
                 questionText: 'Bảng chỉ dẫn sử dụng an toàn hoá chất SDS dùng trong salon:',
                 options: [
@@ -177,7 +183,7 @@ const createNailExam = async () => {
                     { text: 'Quy định những loại sản phẩm mà các nhà sản xuất hoá chất có thể sản xuất', isCorrect: true }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Vật dụng dùng 1 lần được khử trùng như thế nào?',
@@ -188,7 +194,7 @@ const createNailExam = async () => {
                     { text: 'Bằng chất khử trùng hợp lệ', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Trong số các bước sau đây thuộc các quy trình chăm sóc móng tay cơ bản, nên làm bước nào đầu tiên?',
@@ -199,7 +205,7 @@ const createNailExam = async () => {
                     { text: 'Làm sạch phần đầu móng', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Tần suất khử trùng dụng cụ đa năng:',
@@ -210,7 +216,7 @@ const createNailExam = async () => {
                     { text: 'Sau 2 giờ làm việc', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Sản phẩm nào có thể làm hỏng nhựa và kim loại:',
@@ -221,7 +227,7 @@ const createNailExam = async () => {
                     { text: 'Thuốc sát trùng', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Các phương pháp được sử dụng để loại bỏ giảm lây nhiễm các vi sinh vật truyền nhiễm được gọi là:',
@@ -232,7 +238,7 @@ const createNailExam = async () => {
                     { text: 'Kiểm soát vi khuẩn', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Khi sử dụng chất diệt trùng đồ nghề theo tiêu chuẩn EPA, bạn nên:',
@@ -243,7 +249,7 @@ const createNailExam = async () => {
                     { text: 'Chỉ nhúng sơ qua rồi lấy ra ngay', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Khi khử trùng các dụng cụ bị dơ bạn nên sử dụng tiêu chuẩn thời gian nào cho ngâm dung dịch khử trùng của bạn:',
@@ -254,7 +260,7 @@ const createNailExam = async () => {
                     { text: 'Các chỉ dẫn của nhà sản xuất', isCorrect: true }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Nhân viên có bằng hành nghề nên mang vật dụng nào sau đây khi pha chất khử trùng:',
@@ -265,7 +271,7 @@ const createNailExam = async () => {
                     { text: 'Khẩu trang', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Khi loại bỏ phần da viền quanh móng và vớt phần vụn xuống, nhân viên có bằng hành nghề cần phải làm gì đầu tiên?',
@@ -276,7 +282,7 @@ const createNailExam = async () => {
                     { text: 'Dùng đầu nhọn của chiếc bấm móng để cắt phần da viền', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Làm thế nào để thợ hành nghề được cấp bằng xác định thời gian tiếp xúc chính xác với chất khử trùng?',
@@ -287,7 +293,7 @@ const createNailExam = async () => {
                     { text: 'Ít nhất 15 phút', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Trong khi chăm sóc bàn chân, trước hết bàn chân của khách hàng nên:',
@@ -298,7 +304,7 @@ const createNailExam = async () => {
                     { text: 'Tiệt trùng', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Khi bôi chất loại bỏ lớp biểu bì điều quan trọng tránh tiếp xúc với mức độ để ngăn ngừa:',
@@ -309,7 +315,7 @@ const createNailExam = async () => {
                     { text: 'Nhiễm khuẩn', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Cần làm gì loại bỏ vi khuẩn phát sinh trước khi khử trùng?',
@@ -320,7 +326,7 @@ const createNailExam = async () => {
                     { text: 'Tiệt trùng', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Trước khi làm sạch vết cắt máu do khách hàng gây ra, người thợ có bằng hành nghề phải làm gì?',
@@ -331,7 +337,7 @@ const createNailExam = async () => {
                     { text: 'Che chắn các dụng cụ một cách khoa học', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Chất nào không sử dụng trên da, tóc hoặc móng?',
@@ -342,9 +348,9 @@ const createNailExam = async () => {
                     { text: 'Chất ổn định nhũ tương', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
-
+        
             //////////////////////////
             {
                 questionText: 'Bất kỳ vật dụng nào không thể khử trùng được sau khi được sử dụng cho mỗi khách hàng đều được:',
@@ -355,7 +361,7 @@ const createNailExam = async () => {
                     { text: 'Được vứt bỏ', isCorrect: true }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Khi pha trộn hoá chất theo hướng dẫn của nhà sản xuất, thợ hành nghề được cấp phép cần có đồ dùng nào sau đây?',
@@ -366,7 +372,7 @@ const createNailExam = async () => {
                     { text: 'Kềm bảo vệ', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Đồ dùng tiếp xúc với máu phải làm gì?',
@@ -377,7 +383,7 @@ const createNailExam = async () => {
                     { text: 'Rửa xà phòng và nước', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Các sản phẩm nào nhằm mục đích giảm vi khuẩn và có thể sử dụng trên da?',
@@ -388,7 +394,7 @@ const createNailExam = async () => {
                     { text: 'Chất cân bằng', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Nên làm gì để dung dịch khử trùng tránh bị nhiễm bẩn?',
@@ -399,7 +405,7 @@ const createNailExam = async () => {
                     { text: 'Rửa dụng cụ thật kỹ trước khi ngâm', isCorrect: true }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Các bạn cất giữ dụng cụ đã khử trùng như thế nào?',
@@ -410,7 +416,7 @@ const createNailExam = async () => {
                     { text: 'Hộp dựng hở nắp', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Mức độ kiểm soát nhiễm trùng nào diệt trùng dễ hơn?',
@@ -421,7 +427,7 @@ const createNailExam = async () => {
                     { text: 'Tiệt trùng', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Hoá chất nào sau đây Dược phẩm Hoa kỳ cấm:',
@@ -432,7 +438,7 @@ const createNailExam = async () => {
                     { text: 'Nước', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Sau khi làm sạch bước tiếp theo kiểm soát lây nhiễm là gì?',
@@ -443,7 +449,7 @@ const createNailExam = async () => {
                     { text: 'Thanh trùng', isCorrect: true }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Trước khi được sử dụng trong salon tất cả các chất khử trùng phải được sự chấp thuận của:',
@@ -454,7 +460,7 @@ const createNailExam = async () => {
                     { text: 'Cơ quan quản lý doanh nghiệp nhỏ', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Trong lúc chăm sóc bàn tay, khi nào nên tạo hình móng?',
@@ -465,7 +471,7 @@ const createNailExam = async () => {
                     { text: 'Trước khi sơn lớp bóng', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Phương pháp nào sau đây thực hiện hiệu quả để khử trùng dụng cụ kim loại?',
@@ -476,7 +482,7 @@ const createNailExam = async () => {
                     { text: 'Thuốc khử trùng được đăng ký với EPA', isCorrect: true }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Khả năng mà cơ thể tiêu diệt vi khuẩn đã xâm nhập để chống lại sự nhiễm trùng nói chung được gọi là:',
@@ -487,7 +493,7 @@ const createNailExam = async () => {
                     { text: 'Nhiễm trùng', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Sau khi làm móng chân chậu ngâm chân phải được:',
@@ -498,7 +504,7 @@ const createNailExam = async () => {
                     { text: 'Sát trùng', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Chất sát trùng chủ yếu được sử dụng để làm gì?',
@@ -509,7 +515,7 @@ const createNailExam = async () => {
                     { text: 'Các bề mặt kệ tủ', isCorrect: true }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Nên làm gì với da tiếp xúc với chất khử trùng:',
@@ -520,7 +526,7 @@ const createNailExam = async () => {
                     { text: 'Rửa lại bằng nước ấm', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Sự xuất hiện của mủ là dấu hiệu của:',
@@ -531,10 +537,10 @@ const createNailExam = async () => {
                     { text: 'Rận', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             //////////////////////////
-
+        
             {
                 questionText: 'Khi bạn đã nghi ngờ khách hàng bị nhiễm trùng móng, bạn phải?',
                 options: [
@@ -544,7 +550,7 @@ const createNailExam = async () => {
                     { text: 'Ngâm móng tay trong dung dịch kháng khuẩn', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Nên làm gì nếu bạn vô ý cắt vào mình khi đang thực hiện dịch vụ:',
@@ -555,7 +561,7 @@ const createNailExam = async () => {
                     { text: 'Làm sạch khu vực làm việc', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Trong số các bước sau đây nên làm bước nào trước tiên?',
@@ -566,7 +572,7 @@ const createNailExam = async () => {
                     { text: 'Cắt phần da quanh móng', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Phương tiện nào sau đây tiệt trùng hiệu quả?',
@@ -577,7 +583,7 @@ const createNailExam = async () => {
                     { text: 'Chất khử trùng ướt', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Thuốc sát trùng hỗ trợ cho:',
@@ -588,7 +594,7 @@ const createNailExam = async () => {
                     { text: 'Làm chậm sự phát triển của vi khuẩn', isCorrect: true }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Để đảm bảo rằng sản phẩm khử trùng mang mức độ hiệu quả hãy luôn thực hiện:',
@@ -599,7 +605,7 @@ const createNailExam = async () => {
                     { text: 'Số đăng ký EPA', isCorrect: true }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Tại sao điều quan trọng đối với khách hàng là tránh cạo lông chân trước khi làm móng?',
@@ -610,7 +616,7 @@ const createNailExam = async () => {
                     { text: 'Có thể làm khách hàng có nguy cơ bị nhiễm trùng', isCorrect: true }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Nếu sử dụng kềm để cắt đi phần bong thừa của móng tay giả, móng sẽ:',
@@ -621,7 +627,7 @@ const createNailExam = async () => {
                     { text: 'Tăng thời gian bảo dưỡng khách hàng', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Khi phết chất nền trước khi sơn móng, trước khi nhúng chổi trở lại trong hộp đựng bạn nên làm gì để tránh bị nhiễm bẩn?',
@@ -632,7 +638,7 @@ const createNailExam = async () => {
                     { text: 'Lau chổi lên 1 chiếc khăn sạch', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Làm sạch mạnh mẽ dưới đầu ngón tay có thể gây ra',
@@ -643,7 +649,7 @@ const createNailExam = async () => {
                     { text: 'Phá vỡ lớp kết dính Hyponychium', isCorrect: true }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Yếu tố nào sau đây không ảnh hưởng đến sự an toàn của thợ hành nghề được cấp phép hoặc khách hàng:',
@@ -654,7 +660,7 @@ const createNailExam = async () => {
                     { text: 'Viêm da tiếp xúc', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Mũi quay máy dũa điện nào được cho là sử dụng 1 lần:',
@@ -665,7 +671,7 @@ const createNailExam = async () => {
                     { text: 'Mũi mài móng', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Cách sửa móng tay bị xước:',
@@ -676,7 +682,7 @@ const createNailExam = async () => {
                     { text: 'Cắt sửa móng với dầu nóng', isCorrect: true }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Các vòng lưỡi quay trong vòng hoàn chỉnh của mỗi phút gọi là:',
@@ -687,7 +693,7 @@ const createNailExam = async () => {
                     { text: 'MPA', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Mô hoặc da mềm chung quanh đáy móng tay và móng chân được gọi là:',
@@ -698,7 +704,7 @@ const createNailExam = async () => {
                     { text: 'Nếp gấp trên móng', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Phần móng nào bịt kín phần đầu móng cho da bình thường để tránh ẩm, vi khuẩn hoặc nấm xâm nhập vào móng?',
@@ -709,7 +715,7 @@ const createNailExam = async () => {
                     { text: 'Chứng sưng liên móng', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Chức năng của dũa bàn chân là nhằm:',
@@ -720,7 +726,7 @@ const createNailExam = async () => {
                     { text: 'Làm sạch dọc theo các chiều móng chân bé hơn', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Những nếp nhăn ở 2 bên móng mọc theo chiều của móng được gọi là:',
@@ -731,7 +737,7 @@ const createNailExam = async () => {
                     { text: 'Các nếp gấp', isCorrect: true }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Chúng ta nên tránh cắt vào mô sống xung quanh móng, chúng ta có thể tạo ra:',
@@ -742,10 +748,10 @@ const createNailExam = async () => {
                     { text: 'Xước măng rô', isCorrect: true }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             //////////////////////////
-
+        
             {
                 questionText: 'Không hoá chất Monomer không mùi, không:',
                 options: [
@@ -755,7 +761,7 @@ const createNailExam = async () => {
                     { text: 'Nhíp vào móng thật', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Để ngăn móng không bị tách sơn ra từng lớp quý vị nên sử dụng:',
@@ -766,7 +772,7 @@ const createNailExam = async () => {
                     { text: 'Lớp xi ngắn', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Vô tình bôi chất Acrylic vào biểu bì có thể khiến:',
@@ -777,7 +783,7 @@ const createNailExam = async () => {
                     { text: 'Sản phẩm dễ bong tróc', isCorrect: true }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Thành phần chính của móng là:',
@@ -788,7 +794,7 @@ const createNailExam = async () => {
                     { text: 'Cacbon', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Các sản phẩm được yêu cầu lấy khỏi hủ chứa, chẳng hạn như kem hoặc sản phẩm tạo kiểu cho móng bằng cách nào sau đây:',
@@ -799,7 +805,7 @@ const createNailExam = async () => {
                     { text: 'Vật dụng còn lại bỏ sót được khử trùng', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Sản phẩm nào cho phép móng giả Monomer và Acrylic liên kết với mặt móng:',
@@ -810,7 +816,7 @@ const createNailExam = async () => {
                     { text: 'Sơn lót', isCorrect: true }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Phải dùng gì để lấy một lượng nhỏ bột còn sót lại trên đĩa móng sau khi lấy đầu móng ra:',
@@ -821,7 +827,7 @@ const createNailExam = async () => {
                     { text: 'Dũa điện tử', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Mũi quay máy dũa điện nào được cho là sử dụng một lần?',
@@ -832,7 +838,7 @@ const createNailExam = async () => {
                     { text: 'Mũi mài móng', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Mô sống ở đầu đĩa móng che phủ phần mô dưới móng và dây thần kinh dưới đầu móng không được cắt phạm vào hoặc làm tổn thương đến:',
@@ -843,7 +849,7 @@ const createNailExam = async () => {
                     { text: 'Da nền móng', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Các vật dụng dùng 1 lần còn được gọi là:',
@@ -854,7 +860,7 @@ const createNailExam = async () => {
                     { text: 'Được khử trùng', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Quý vị nên bỏ 1 lượng nhỏ monomer còn sót lại bằng cách nào?',
@@ -865,7 +871,7 @@ const createNailExam = async () => {
                     { text: 'Một chiếc khăn vào thùng rác', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Để tránh làm hỏng móng, mũi quay dũa điện phải lấy độ chính xác là:',
@@ -876,7 +882,7 @@ const createNailExam = async () => {
                     { text: '60 độ', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Mục đích cắt đầu móng trong quá trình làm móng tay cơ bản',
@@ -887,7 +893,7 @@ const createNailExam = async () => {
                     { text: 'Chuẩn bị sơn móng', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Trước khi gắn móng giả làm từ monomer nên sử dụng sơn lót như thế nào?',
@@ -898,7 +904,7 @@ const createNailExam = async () => {
                     { text: 'Nhẹ nhàng sơn lót lên móng thật', isCorrect: true }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Nên gỡ bỏ móng bột như thế nào?',
@@ -909,7 +915,7 @@ const createNailExam = async () => {
                     { text: 'Ngâm trong Liquid', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Mục đích làm khô móng trước khi gắn móng giả là gì?',
@@ -920,7 +926,7 @@ const createNailExam = async () => {
                     { text: 'Để hổ trợ cho vệt', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Trước khi gắn móng giả làm từ Monomer và Polymer, nên sử dụng sơn lót như thế nào?',
@@ -931,7 +937,7 @@ const createNailExam = async () => {
                     { text: 'Chấm một chút sơn lót vào móng', isCorrect: true }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Mục đích của gel liên kết UV là gì?',
@@ -942,7 +948,7 @@ const createNailExam = async () => {
                     { text: 'Tăng độ bám dính hoặc cứng lại', isCorrect: true }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Trước khi gắn móng giả làm từ Monomer nên sử dụng sản phẩm sơn lót như thế nào?',
@@ -953,7 +959,7 @@ const createNailExam = async () => {
                     { text: 'Chỉ nên sử dụng sơn lót có màng bọc móng chứ không phải là Acrylic', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Các bạn sử dụng cái nào vuốt kem thoa trên tay dính trên mặt móng?',
@@ -964,7 +970,7 @@ const createNailExam = async () => {
                     { text: 'Nước', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Nên tránh cắt vào mô sống chung quanh móng chân hay móng tay chúng ta có thể tạo ra:',
@@ -975,7 +981,7 @@ const createNailExam = async () => {
                     { text: 'Xước măng rô', isCorrect: true }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Điều gì làm thay đổi hình dạng hoặc độ dày của lớp sừng?',
@@ -986,7 +992,7 @@ const createNailExam = async () => {
                     { text: 'Xuất hiện các đốm trắng', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Hình dạng móng nào là xước nhất và dễ bị gãy hơn:',
@@ -997,7 +1003,7 @@ const createNailExam = async () => {
                     { text: 'Nhọn', isCorrect: true }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Các đường rãnh hoặc rãnh mọc hai bên móng là gì?',
@@ -1008,7 +1014,7 @@ const createNailExam = async () => {
                     { text: 'Biểu bì', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Nên tỉa móng chân như thế nào?',
@@ -1019,7 +1025,7 @@ const createNailExam = async () => {
                     { text: 'Ngắn hơn phần méo móng chân', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Chức năng chính da viền quanh móng là:',
@@ -1030,7 +1036,7 @@ const createNailExam = async () => {
                     { text: 'Cung cấp chất bổ dưỡng cho móng', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Khi xác định độ dài của móng giả điều quan trọng ngăn ngừa nứt bằng cách sử dụng:',
@@ -1041,7 +1047,7 @@ const createNailExam = async () => {
                     { text: 'Khoan móng', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Tại sao dầu và kem được sử dụng trong khi làm móng tay và móng chân?',
@@ -1052,7 +1058,7 @@ const createNailExam = async () => {
                     { text: 'Để cho lớp sừng khách hàng được dày hơn', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Người được cấp phép có thể không thực hiện dịch vụ:',
@@ -1063,7 +1069,7 @@ const createNailExam = async () => {
                     { text: 'Chứng móng đốm trắng', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Kem dưỡng viền quanh móng có tác dụng ngăn ngừa:',
@@ -1074,7 +1080,7 @@ const createNailExam = async () => {
                     { text: 'Các vết ố trên móng', isCorrect: true }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Một khách hàng muốn gỡ bỏ móng giả nhân viên nên làm gì?',
@@ -1085,7 +1091,7 @@ const createNailExam = async () => {
                     { text: 'Bóc đầu móng giả đó ra', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Để máy dũa điện tử hoạt động chính xác, điều quan trọng',
@@ -1096,7 +1102,7 @@ const createNailExam = async () => {
                     { text: 'Máy dũa được thay đổi giữa các khách hàng', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Dầu dưỡng móng tay ngăn ngừa?',
@@ -1107,7 +1113,7 @@ const createNailExam = async () => {
                     { text: 'Vết ố lên trên móng tay đã sơn', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Nên đánh sơn bóng vào phần nào của móng?',
@@ -1118,7 +1124,7 @@ const createNailExam = async () => {
                     { text: 'Phần biểu mô', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Lớp sơn lót cải thiện:',
@@ -1129,7 +1135,7 @@ const createNailExam = async () => {
                     { text: 'Tăng độ cứng móng', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             //////////////////////////  
             {
@@ -1141,7 +1147,7 @@ const createNailExam = async () => {
                     { text: 'Chứng sưng liên móng', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Chất lượng cọ hiệu quả nhất sử dụng dung dịch Monomer được làm bằng:',
@@ -1152,7 +1158,7 @@ const createNailExam = async () => {
                     { text: 'Lông lợn', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Một cục máu đông ở phần dưới móng gây ra do chấn thương được gọi là:',
@@ -1163,7 +1169,7 @@ const createNailExam = async () => {
                     { text: 'Vết xước móng tay', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Ngăn ngừa móng bị tách lớp, bong ra từng lớp nên sử dụng:',
@@ -1174,7 +1180,7 @@ const createNailExam = async () => {
                     { text: 'Quý vị nên sơn lợt lợt', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Bước nào sau đây trong quá trình gắn đầu móng giả là bước đầu tiên?',
@@ -1185,7 +1191,7 @@ const createNailExam = async () => {
                     { text: 'Trượt vào trên các đầu móng tay', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Nên tránh cắt quá nhiều vào phần da sống vì điều này có thể:',
@@ -1196,7 +1202,7 @@ const createNailExam = async () => {
                     { text: 'Móng mọc vào giữa', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Phải thực hiện điều gì khi gắn đầu móng giả vào đầu móng thật?',
@@ -1207,7 +1213,7 @@ const createNailExam = async () => {
                     { text: 'Thoa dầu lên tay tròn', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Điều gì quyết định độ dài, chiều rộng, độ cong của lớp sừng?',
@@ -1218,7 +1224,7 @@ const createNailExam = async () => {
                     { text: 'Cấu trúc chất của nền móng', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Nếu khách hàng đến salon trong tình trạng móng bị tách lớp, có những đường lằn, đường dọc quý vị nên:',
@@ -1229,7 +1235,7 @@ const createNailExam = async () => {
                     { text: 'Kiến nghị khách hàng chăm sóc móng với đầu móng', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Khi gắn đầu móng giả, mục đích của chất Primer:',
@@ -1240,7 +1246,7 @@ const createNailExam = async () => {
                     { text: 'Làm khô móng tự nhiên để móng giả dính vào thân móng', isCorrect: true }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Những vết nhăn ở hai bên móng mọc hướng theo chiều của móng được gọi là:',
@@ -1251,7 +1257,7 @@ const createNailExam = async () => {
                     { text: 'Phần thịt trên móng', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Để loại trừ bất kỳ câu hỏi nào về dịch vụ sẽ được thực hiện, hãy luôn thực hiện:',
@@ -1262,7 +1268,7 @@ const createNailExam = async () => {
                     { text: 'Giới thiệu chính thức', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Thông tin quan trọng cần biết về khách hàng trước khi thực hiện massage là gì?',
@@ -1273,7 +1279,7 @@ const createNailExam = async () => {
                     { text: 'Bệnh trạng', isCorrect: true }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Người thợ được cấp phép hành nghề nên tránh thực hiện massage trên khách hàng có điều kiện nào sau đây:',
@@ -1284,7 +1290,7 @@ const createNailExam = async () => {
                     { text: 'Cao huyết áp', isCorrect: true }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Trong quá trình tư vấn khách hàng, lắng nghe mong muốn của khách hàng và nhắc lại mong muốn của họ để họ hiểu là kiểu lắng nghe:',
@@ -1295,7 +1301,7 @@ const createNailExam = async () => {
                     { text: 'Phản chiếu', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Ứng xử đúng mức và sự kết hợp đạo đức là phát triển của:',
@@ -1306,7 +1312,7 @@ const createNailExam = async () => {
                     { text: 'Giao tiếp', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Khách hàng bị bệnh viêm khớp nên tránh:',
@@ -1317,7 +1323,7 @@ const createNailExam = async () => {
                     { text: 'Xoa vuốt nhẹ', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Khách hàng bị bệnh truyền nhiễm hoặc lây nhiễm có thể:',
@@ -1328,7 +1334,7 @@ const createNailExam = async () => {
                     { text: 'Được làm dịch vụ nếu khách hàng đeo găng tay', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Nhân viên có bằng hành nghề phải làm gì nếu khách hàng bị nghi ngờ nhiễm nấm khi chăm sóc bàn chân:',
@@ -1339,7 +1345,7 @@ const createNailExam = async () => {
                     { text: 'Sử dụng chất sát khuẩn', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Kỹ thuật nhấn trong massage cần thực hiện theo hướng nào?',
@@ -1350,7 +1356,7 @@ const createNailExam = async () => {
                     { text: 'Từ đầu cơ bắp đến dây chằng', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Trong thao tác massage, bóp sâu mạnh mẽ nên được:',
@@ -1361,7 +1367,7 @@ const createNailExam = async () => {
                     { text: 'Chỉ sử dụng trong massage chân', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Các loại hơi nguy hiểm được sản sinh ra trong salon:',
@@ -1372,7 +1378,7 @@ const createNailExam = async () => {
                     { text: 'Than hoạt tính được sử dụng để thông khí', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Hệ thống thông gió ở tiệm salon có tác dụng gì?',
@@ -1383,7 +1389,7 @@ const createNailExam = async () => {
                     { text: 'Giúp các sản phẩm sơn khô nhanh hơn', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             },
             {
                 questionText: 'Phương tiện nào sau đây giúp làm thông hơi hiệu quả trong salon?',
@@ -1394,21 +1400,38 @@ const createNailExam = async () => {
                     { text: 'Máy lọc không khí và mặt nạ chống bụi', isCorrect: false }
                 ],
                 category: 1,
-                quizId: nailExamQuiz._id
+                
             }
-
+        
         ];
+        
+        
+        
 
-        // Insert all questions into the database
-        const insertedQuestions = await Question.insertMany(questions);
+        if (!nailQuestions) {
+            throw new Error('nailQuestions is undefined');
+        }
+
+        await Quiz.deleteMany({ title: 'Nail Exam' });
+
+        const nailExamQuiz = await Quiz.create({
+            title: 'Nail Exam',
+            description: 'A quiz on nail theory and practice',
+            price: 10.00
+        });
+
+        const questionsWithQuizId = nailQuestions.map(question => ({
+            ...question,
+            quizId: nailExamQuiz._id
+        }));
+
+        const insertedQuestions = await Question.insertMany(questionsWithQuizId);
         console.log('Inserted Nail Exam questions:', insertedQuestions);
 
-        // Update the quiz with the inserted question IDs
         await Quiz.findByIdAndUpdate(nailExamQuiz._id, { $push: { questions: { $each: insertedQuestions.map(q => q._id) } } });
 
         console.log('Nail Exam quiz created successfully.');
 
-        // Disconnect from the database
         await mongoose.disconnect();
         console.log('Database disconnected');
     } catch (err) {

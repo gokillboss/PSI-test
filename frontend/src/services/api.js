@@ -1,12 +1,12 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/api'; // Cập nhật URL này theo môi trường production nếu cần
+const API_URL = 'http://localhost:5000/api'; // Update this URL for the production environment if needed
 
 const api = axios.create({
   baseURL: API_URL,
 });
 
-// Thêm interceptor để đính kèm token vào mọi request
+// Add an interceptor to attach the token to every request
 api.interceptors.request.use(config => {
   const token = localStorage.getItem('token');
   if (token) {
@@ -40,5 +40,26 @@ export const getUserResults = (userId) => api.get(`/result/user/${userId}`);
 export const getAllQuestions = () => api.get('/test/questions/all');
 
 
+//Payment
+export const checkQuizPurchase = async (quizId) => {
+    try {
+        const response = await api.get(`/payment/check-purchase?quizId=${quizId}`);
+        return response.data;
+    } catch (error) {
+        console.error('Error checking quiz purchase:', error);
+        throw error;
+    }
+};
+
+export const createCheckoutSession = async (quizId) => {
+    try {
+        const response = await api.post('/payment/create-checkout-session', { quizId });
+        console.log('createCheckoutSession response:', response.data);
+        return response.data;
+    } catch (error) {
+        console.error('Error creating checkout session:', error);
+        throw error;
+    }
+};
 
 export default api;
