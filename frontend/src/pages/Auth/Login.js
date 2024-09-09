@@ -28,7 +28,7 @@ const Login = () => {
     };
 
     return (
-        <Container fluid className="d-flex mt-5 justify-content-center">
+        <Container fluid className="d-flex mt-5 justify-content-center min-vh-100">
             <Row className="justify-content-md-center w-100">
                 <Col md="6" lg="4">
                     <Card className="p-4 shadow-lg login-card">

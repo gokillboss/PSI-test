@@ -1,0 +1,75 @@
+/* footer.css */
+
+/* General styling for the footer */
+.footer-section {
+    background-color: #343a40;  /* Dark background */
+    padding: 40px 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Styling for headings */
+.footer-section h5 {
+    color: #f8f9fa;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+/* About section styling */
+.about-section {
+    color: #f8f9fa;
+    padding-right: 20px;
+}
+
+/* Contact section styling */
+.contact-section {
+    background-color: #495057; /* Slightly lighter background for contact section */
+    border: 1px solid #6c757d;
+    border-radius: 10px;
+    padding: 15px 20px; /* Giảm padding để khung vừa nội dung */
+    display: inline-block; /* Đảm bảo khung chỉ bao quanh nội dung */
+    float: right; /* Đẩy phần contact sát bên phải */
+    max-width: 100%; /* Đảm bảo khung không vượt quá độ rộng của container */
+}
+
+.contact-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 0; /* Loại bỏ margin */
+}
+
+.contact-list li {
+    margin-bottom: 10px; /* Giảm khoảng cách giữa các mục liên hệ */
+}
+
+.contact-icon {
+    color: #f8f9fa;
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.contact-list a {
+    color: #f8f9fa;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.contact-list a:hover {
+    color: #007bff;
+}
+
+/* Footer bottom section styling */
+.footer-bottom {
+    background-color: #23272b;
+    color: #f8f9fa;
+    font-size: 14px;
+    padding: 10px;
+}
+
+.footer-bottom a {
+    color: #f8f9fa;
+    font-weight: 500;
+}
+
+.footer-bottom a:hover {
+    color: #007bff;
+}

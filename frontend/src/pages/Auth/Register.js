@@ -49,7 +49,7 @@ const Register = () => {
     };
 
     return (
-        <Container className="register-container">
+        <Container className="register-container min-vh-100">
             <Row className="justify-content-md-center">
                 <Col md="6">
                     <Card className="p-5 shadow-lg border-0 register-card">
