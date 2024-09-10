@@ -1,27 +1,30 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Button, Container, Row, Col } from 'react-bootstrap';
+import { Form, Button, Container, Row, Col, Card } from 'react-bootstrap';
 import { getUserProfile, updateUserProfile } from '../services/api';
+import './profile.css';  // Import file CSS cho các tùy chỉnh giao diện
 
 const Profile = () => {
   const [profile, setProfile] = useState({});
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  //const [avatar, setAvatar] = useState(null);
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
-    
     const fetchProfile = async () => {
       try {
         const res = await getUserProfile();
         setProfile(res.data);
-        //setFirstName(res.data.firstName);
+        setFirstName(res.data.firstName);
         setLastName(res.data.lastName);
+        setEmail(res.data.email);
+        setPhone(res.data.phoneNumber);  // Sử dụng phoneNumber thay vì phone
       } catch (error) {
         console.error('Error fetching profile', error);
       }
     };
-
+  
     fetchProfile();
   }, []);
 
@@ -30,9 +33,8 @@ const Profile = () => {
     const formData = new FormData();
     formData.append('firstName', firstName);
     formData.append('lastName', lastName);
-    // if (avatar) {
-    //   formData.append('avatar', avatar);
-    // }
+    formData.append('email', email);
+    formData.append('phone', phone);
 
     try {
       const res = await updateUserProfile(formData);
@@ -44,84 +46,91 @@ const Profile = () => {
   };
 
   return (
-    <Container>
-      <Row className="justify-content-md-center">
-        <Col md="8">
-          <h2>Profile</h2>
-          {!isEditing ? (
-            <div>
-              <Row>
-                <Col md="4">
-                  {profile.avatar && (
-                    <img 
-                      src={`http://localhost:5000/uploads/${profile.avatar}`} 
-                      alt="Avatar" 
-                      style={{ width: '150px', height: '150px' }} 
-                    />
-                  )}
-                </Col>
-                <Col md="8">
-                  <p><strong>First Name:</strong> {profile.firstName}</p>
-                  <p><strong>Last Name:</strong> {profile.lastName}</p>
-                </Col>
-              </Row>
-              <Button variant="primary" onClick={() => setIsEditing(true)}>Edit</Button>
-            </div>
-          ) : (
-            <Form onSubmit={handleSubmit}>
-              <Row>
-                <Col md="4">
-                  <Form.Group controlId="formAvatar">
-                    <Form.Label>Avatar</Form.Label>
-                    <Form.Control 
-                      type="file" 
-                    //   onChange={(e) => setAvatar(e.target.files[0])} 
-                    />
-                    {profile.avatar && (
-                      <div>
-                        <img 
-                          src={`http://localhost:5000/uploads/${profile.avatar}`} 
-                          alt="Avatar" 
-                          style={{ width: '150px', height: '150px', marginTop: '10px' }} 
+    <div className="profile-background my-5">
+      <Container className="profile-container">
+        <Row className="justify-content-md-center">
+          <Col md="8">
+            <Card className="profile-card shadow-sm p-4">
+              <div className="profile-header">
+                <h2 className="profile-title">Thông Tin Cá Nhân</h2>
+              </div>
+              {!isEditing ? (
+                <div>
+                  <Row>
+                    <Col md="12">
+                      <p><strong>Họ tên:</strong> {profile.firstName} {profile.lastName}</p>
+                      <p><strong>Email:</strong> {profile.email}</p>
+                      <p><strong>Số điện thoại:</strong> {profile.phoneNumber}</p>
+                    </Col>
+                  </Row>
+                  <Button variant="primary" onClick={() => setIsEditing(true)} className="mr-2">
+                    Chỉnh sửa
+                  </Button>
+                  <Button variant="secondary">Đổi mật khẩu</Button>
+                </div>
+              ) : (
+                <Form onSubmit={handleSubmit}>
+                  <Row>
+                    <Col md="12">
+                      <Form.Group controlId="formFirstName">
+                        <Form.Label>Họ</Form.Label>
+                        <Form.Control 
+                          type="text" 
+                          value={firstName} 
+                          onChange={(e) => setFirstName(e.target.value)} 
+                          placeholder="Nhập họ" 
+                          className="form-input"
                         />
-                      </div>
-                    )}
-                  </Form.Group>
-                </Col>
-                <Col md="8">
-                  <Form.Group controlId="formFirstName">
-                    <Form.Label>First Name</Form.Label>
-                    <Form.Control 
-                      type="text" 
-                      value={firstName} 
-                      onChange={(e) => setFirstName(e.target.value)} 
-                      placeholder="Enter first name" 
-                    />
-                  </Form.Group>
+                      </Form.Group>
 
-                  <Form.Group controlId="formLastName">
-                    <Form.Label>Last Name</Form.Label>
-                    <Form.Control 
-                      type="text" 
-                      value={lastName} 
-                      onChange={(e) => setLastName(e.target.value)} 
-                      placeholder="Enter last name" 
-                    />
-                  </Form.Group>
-                </Col>
-              </Row>
+                      <Form.Group controlId="formLastName">
+                        <Form.Label>Tên</Form.Label>
+                        <Form.Control 
+                          type="text" 
+                          value={lastName} 
+                          onChange={(e) => setLastName(e.target.value)} 
+                          placeholder="Nhập tên" 
+                          className="form-input"
+                        />
+                      </Form.Group>
 
-              <Button variant="primary" type="submit">
-                Save
-              </Button>
-              <Button variant="secondary" onClick={() => setIsEditing(false)} className="ml-2">
-                Cancel
-              </Button>
-            </Form>
-          )}
-        </Col>
-      </Row>
-    </Container>
+                      <Form.Group controlId="formEmail">
+                        <Form.Label>Email</Form.Label>
+                        <Form.Control 
+                          type="email" 
+                          value={email} 
+                          onChange={(e) => setEmail(e.target.value)} 
+                          placeholder="Nhập email" 
+                          className="form-input"
+                        />
+                      </Form.Group>
+
+                      <Form.Group controlId="formPhone">
+                        <Form.Label>Số điện thoại</Form.Label>
+                        <Form.Control 
+                          type="text" 
+                          value={phone} 
+                          onChange={(e) => setPhone(e.target.value)} 
+                          placeholder="Nhập số điện thoại" 
+                          className="form-input"
+                        />
+                      </Form.Group>
+                    </Col>
+                  </Row>
+
+                  <Button variant="primary" type="submit" className="mr-2">
+                    Lưu
+                  </Button>
+                  <Button variant="secondary" onClick={() => setIsEditing(false)}>
+                    Hủy
+                  </Button>
+                </Form>
+              )}
+            </Card>
+          </Col>
+        </Row>
+      </Container>
+    </div>
   );
 };
 

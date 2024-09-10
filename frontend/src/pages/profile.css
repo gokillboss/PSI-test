@@ -1,0 +1,48 @@
+/* Profile.css */
+
+.profile-container {
+    margin-top: 50px;
+}
+
+.profile-card {
+    border-radius: 10px;
+    background-color: #ffffff;
+    border: none;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.profile-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #007bff;
+    margin-bottom: 20px;
+}
+
+.profile-info p {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.form-input {
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1rem;
+}
+
+button {
+    border-radius: 5px;
+    margin: auto;
+    padding: 10px 20px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+button:focus {
+    outline: none;
+    box-shadow: none;
+}

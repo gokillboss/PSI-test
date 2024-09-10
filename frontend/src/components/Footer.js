@@ -42,8 +42,8 @@ const Footer = () => {
         </Row>
       </Container>
       <div className="footer-bottom text-center p-3">
-        © 2024 Nail Certification: 
-        <a className="text-light" href="https://nailcertification.com/"> nailcertification.com</a>
+        © 2024 Thi Nail All rights reserved:  
+        <a className="text-light" href="https://thinail.com/">thinail.com</a>
       </div>
     </footer>
   );

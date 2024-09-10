@@ -14,8 +14,6 @@ const getAllUsers = async (req, res) => {
     }
 };
 
-
-
 const getUserById = async (req, res) => {
     try {
         const userId = req.params.id;
@@ -29,9 +27,6 @@ const getUserById = async (req, res) => {
         res.status(500).json({ message: 'Server Error' });
     }
 };
-
-
-
 
 const updateUser = async (req, res) => {
     const { id } = req.params;
@@ -59,8 +54,6 @@ const updateUser = async (req, res) => {
     }
 };
 
-
-
 const deleteUser = async (req, res) => {
     const { id } = req.params;
     try {
@@ -76,8 +69,6 @@ const deleteUser = async (req, res) => {
     }
 };
 
-
-
 const getUserProfile = async (req, res) => {
     try {
         const user = await User.findById(req.user.id).select('-password');
@@ -91,11 +82,8 @@ const getUserProfile = async (req, res) => {
     }
 };
 
-
-
 const updateUserProfile = async (req, res) => {
-    const { firstName, lastName } = req.body;
-    const avatar = req.file ? req.file.filename : null;
+    const { firstName, lastName, phone } = req.body;
 
     try {
         let user = await User.findById(req.user.id);
@@ -105,12 +93,7 @@ const updateUserProfile = async (req, res) => {
 
         user.firstName = firstName || user.firstName;
         user.lastName = lastName || user.lastName;
-        if (avatar) {
-            if (user.avatar) {
-                fs.unlinkSync(path.join(__dirname, '..', 'uploads', user.avatar));
-            }
-            user.avatar = avatar;
-        }
+        user.phoneNumber = phone || user.phoneNumber;
 
         await user.save();
         res.status(200).json(user);
@@ -120,7 +103,7 @@ const updateUserProfile = async (req, res) => {
     }
 };
 
-
+// Export the controller functions
 module.exports = {
     getAllUsers,
     getUserById,
