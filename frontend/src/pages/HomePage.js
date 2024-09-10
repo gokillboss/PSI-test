@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
-import { Helmet, HelmetProvider } from 'react-helmet-async';  // Sử dụng react-helmet-async
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import nailExamImage from '../assets/nail-exam.jpg';
 import { useNavigate } from 'react-router-dom';
 import './homePage.css';
@@ -15,8 +15,8 @@ const HomePage = () => {
     return (
         <HelmetProvider>
             <Helmet>
-                <title>Đề Thi Nail | Luyện Thi Bằng Nail Mới Nhất California 2024</title>
-                <meta name="description" content="Luyện thi chứng chỉ nail với các đề thi mới nhất từ California và toàn Mỹ. Cập nhật liên tục đề thi lý thuyết nails 2024. Chuẩn bị thi nail miễn phí ngay hôm nay." />
+                <title>Đề Thi Nail | Đề Thi Nail Mới Nhất| Đề thì nail 2024</title>
+                <meta name="description" content="Đề thi chứng chỉ nail với các đề thi mới nhất năm 2024. Cập nhật liên tục đề thi lý thuyết nails 2024. Luyện thi thử bằng nail." />
                 <meta name="keywords" content="đề thi nail, bằng nail, đề thi nail California, đề thi nail mới nhất, đề thi nail 2024, trắc nghiệm nails, luyện thi nails" />
                 <script type="application/ld+json">
                     {`
@@ -25,10 +25,10 @@ const HomePage = () => {
                       "@type": "WebPage",
                       "name": "Đề Thi Nail",
                       "description": "Luyện thi chứng chỉ nail với các đề thi mới nhất từ California và toàn Mỹ. Cập nhật liên tục đề thi lý thuyết nails 2024.",
-                      "url": "https://yourwebsite.com",
+                      "url": "https://thinail.com",
                       "keywords": "đề thi nail, bằng nail, đề thi nail California, đề thi nail mới nhất, đề thi nail 2024",
                       "publisher": {
-                        "@type": "Organization",
+                        "@type": "Invidual",
                         "name": "Nail Certification Exam Prep"
                       }
                     }
