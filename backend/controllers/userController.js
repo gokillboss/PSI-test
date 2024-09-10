@@ -1,7 +1,6 @@
 const User = require('../models/userModel');
 const bcrypt = require('bcryptjs');
-const fs = require('fs');
-const path = require('path');
+
 
 // Define your controller functions
 const getAllUsers = async (req, res) => {
