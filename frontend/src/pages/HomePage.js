@@ -62,16 +62,16 @@ const HomePage = () => {
                     <Col md={4}>
                         <Card className="h-100 homepage-card">
                             <Card.Body>
-                                <Card.Title>Luyện Tập Miễn Phí</Card.Title>
-                                <Card.Text>Truy cập không giới hạn vào các bài thi trắc nghiệm để nâng cao kỹ năng.</Card.Text>
+                                <Card.Title>Dễ dàng luyện tập</Card.Title>
+                                <Card.Text>Truy cập vào các bài thi trắc nghiệm để nâng cao khả năng ghi nhớ để chuẩn bị cho kỳ thi.</Card.Text>
                             </Card.Body>
                         </Card>
                     </Col>
                     <Col md={4}>
                         <Card className="h-100 homepage-card">
                             <Card.Body>
-                                <Card.Title>Theo Dõi Tiến Độ</Card.Title>
-                                <Card.Text>Xem báo cáo chi tiết về quá trình học tập và cải thiện của bạn.</Card.Text>
+                                <Card.Title>Thực hiện thi thử</Card.Title>
+                                <Card.Text>Thực hiện các bài thi thử mô phỏng theo bài thi của PSI, làm quen với cuộc thi dễ dàng.</Card.Text>
                             </Card.Body>
                         </Card>
                     </Col>

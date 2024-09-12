@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Form, Button, Container, Row, Col, Alert } from 'react-bootstrap';
 import { findPassword } from '../../services/api';
 import { Link } from 'react-router-dom';
+import './findPassword.css';
 
 const FindPassword = () => {
     const [email, setEmail] = useState('');
@@ -58,10 +59,10 @@ const FindPassword = () => {
     };
 
     return (
-        <Container className="min-vh-100 d-flex align-items-center justify-content-center bg-light">
-            <Row className="w-100 justify-content-center">
+        <Container className="min-vh-100  bg-light">
+            <Row className="w-100 justify-content-center ">
                 <Col md="6" lg="5" className="mx-auto">
-                    <div className="shadow-lg p-4 bg-white rounded">
+                    <div className="shadow-lg p-4 bg-white rounded find-password-card">
                         <h2 className="text-center mb-4 text-primary">Quên Mật Khẩu</h2>
                         {errorMessage && <Alert variant="danger" className="text-center">{errorMessage}</Alert>}
                         {!successMessage ? (
@@ -78,7 +79,7 @@ const FindPassword = () => {
                                         style={{ fontSize: '1rem' }}
                                     />
                                 </Form.Group>
-                                <Button variant="primary" type="submit" className="w-100 p-3" disabled={isSubmitting}>
+                                <Button variant="primary" type="submit"  className="find-password-btn w-100" disabled={isSubmitting}>
                                     {isSubmitting ? 'Đang xử lý...' : 'Đặt lại mật khẩu'}
                                 </Button>
                             </Form>

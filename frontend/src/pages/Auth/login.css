@@ -1,104 +1,62 @@
-/* login.css */
-
-/* Global Styles */
 .login-card {
-    background: #f8f9fa;
-    border-radius: 15px;
-    padding: 30px;
-    margin-top: 10rem;
-    transition: all 0.3s ease-in-out;
+    background: #ffffff; /* Nền trắng tinh tế */
+    border-radius: 20px; /* Bo tròn hơn */
+    padding: 40px;
+    margin-top: 8rem; /* Vị trí card */
+    transition: transform 0.4s ease, box-shadow 0.4s ease; /* Thêm hiệu ứng di chuyển và đổ bóng */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
 }
 
+
 .login-title {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
-    color: #343a40;
-    font-size: 1.8rem;
+    font-family: 'Roboto', sans-serif; /* Font chữ hiện đại */
+    font-weight: 700; /* Đậm hơn cho tiêu đề */
+    color: #333; /* Màu tối hơn cho tiêu đề */
+    font-size: 2rem;
     text-align: center;
+    margin-bottom: 20px; /* Thêm khoảng cách dưới tiêu đề */
+    animation: fadeInDown 0.7s ease; /* Hiệu ứng tiêu đề */
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .login-btn {
-    background-color: #007bff;
+    background-color: #28a745; /* Màu xanh lá cho nút */
     border: none;
-    padding: 10px;
+    padding: 12px;
     font-size: 18px;
     width: 100%;
-    border-radius: 5px;
+    border-radius: 50px; /* Cạnh bo tròn */
+    color: #fff;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .login-btn:hover {
-    background-color: #0056b3;
+    background-color: #218838; /* Màu xanh lá đậm hơn khi hover */
+    transform: translateY(-3px); /* Nhấc nhẹ nút khi hover */
 }
 
 input.form-control {
-    height: 45px;
-    padding-left: 15px;
+    height: 50px;
+    padding-left: 20px;
     font-size: 16px;
     border: 1px solid #ced4da;
+    border-radius: 10px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 input.form-control:focus {
-    border-color: #007bff;
-    box-shadow: none;
+    border-color: #28a745; /* Đổi màu đường viền khi focus */
+    box-shadow: 0 0 5px rgba(40, 167, 69, 0.5); /* Thêm ánh sáng xanh lá khi focus */
 }
 
-/* Responsive Breakpoints */
-
-/* Medium devices (tablets, 768px and above) */
-@media (max-width: 992px) {
-    .login-card {
-        padding: 20px;
-        margin-top: 8rem; /* Giảm margin cho màn hình tablet */
-    }
-
-    .login-title {
-        font-size: 1.6rem; /* Giảm kích thước tiêu đề cho tablet */
-    }
-
-    .login-btn {
-        font-size: 16px; /* Giảm kích thước nút cho tablet */
-    }
-}
-
-/* Small devices (phones, 576px and above) */
-@media (max-width: 768px) {
-    .login-card {
-        padding: 15px;
-        margin-top: 6rem; /* Giảm margin-top cho điện thoại */
-    }
-
-    .login-title {
-        font-size: 1.4rem; /* Giảm kích thước tiêu đề cho điện thoại */
-    }
-
-    .login-btn {
-        font-size: 15px;
-    }
-
-    input.form-control {
-        height: 40px; /* Giảm chiều cao của input cho thiết bị nhỏ hơn */
-        font-size: 14px;
-    }
-}
-
-/* Extra small devices (phones under 576px) */
-@media (max-width: 576px) {
-    .login-card {
-        padding: 10px;
-        margin-top: 5rem; /* Điều chỉnh vị trí cho các thiết bị rất nhỏ */
-    }
-
-    .login-title {
-        font-size: 1.2rem;
-    }
-
-    .login-btn {
-        font-size: 14px;
-        padding: 8px;
-    }
-
-    input.form-control {
-        height: 35px; /* Giảm chiều cao của input */
-        font-size: 13px;
-    }
-}
