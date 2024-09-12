@@ -89,6 +89,7 @@ exports.createCheckoutSession = async (req, res) => {
 
 exports.verifyPurchase = async (req, res) => {
     try {
+        console.log('kiểm tra thanh toán được gọi')
         const userId = req.user ? req.user.id : null;  // Use req.user.id as set by the middleware
         const quizId = req.query.quizId;
 

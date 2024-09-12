@@ -49,7 +49,7 @@ const Profile = () => {
     <div className="profile-background my-5">
       <Container className="profile-container">
         <Row className="justify-content-md-center">
-          <Col md="8">
+          <Col md="6">
             <Card className="profile-card shadow-sm p-4">
               <div className="profile-header">
                 <h2 className="profile-title">Thông Tin Cá Nhân</h2>
@@ -63,10 +63,19 @@ const Profile = () => {
                       <p><strong>Số điện thoại:</strong> {profile.phoneNumber}</p>
                     </Col>
                   </Row>
-                  <Button variant="primary" onClick={() => setIsEditing(true)} className="mr-2">
+                  <Button 
+                    variant="primary" 
+                    onClick={() => setIsEditing(true)} 
+                    className="mr-3 profile-btn"
+                  >
                     Chỉnh sửa
                   </Button>
-                  <Button variant="secondary">Đổi mật khẩu</Button>
+                  <Button 
+                    variant="primary " 
+                    className="ml-3 profile-btn"
+                  >
+                    Đổi mật khẩu
+                  </Button>
                 </div>
               ) : (
                 <Form onSubmit={handleSubmit}>
@@ -118,7 +127,7 @@ const Profile = () => {
                     </Col>
                   </Row>
 
-                  <Button variant="primary" type="submit" className="mr-2">
+                  <Button variant="primary" type="submit" className="mr-3">
                     Lưu
                   </Button>
                   <Button variant="secondary" onClick={() => setIsEditing(false)}>

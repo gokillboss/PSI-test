@@ -1,5 +1,3 @@
-/* Profile.css */
-
 .profile-container {
     margin-top: 50px;
 }
@@ -30,19 +28,25 @@
     font-size: 1rem;
 }
 
-button {
+.profile-btn {
     border-radius: 5px;
     margin: auto;
-    padding: 10px 20px;
     font-size: 1rem;
     transition: background-color 0.3s ease;
+    margin-right: 10px; 
 }
 
-button:hover {
+.profile-btn:hover {
     opacity: 0.9;
 }
 
-button:focus {
+.profile-btn:focus {
     outline: none;
     box-shadow: none;
 }
+
+/* Nếu muốn thêm hiệu ứng màu sắc khi hover vào các nút */
+.profile-btn.primary:hover {
+    background-color: #0056b3;
+}
+

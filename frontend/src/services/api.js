@@ -43,6 +43,7 @@ export const getAllQuestions = () => api.get('/test/questions/all');
 //Payment
 export const checkQuizPurchase = async (quizId) => {
     try {
+        console.log('Checking quiz purchase...');
         const response = await api.get(`/payment/check-purchase?quizId=${quizId}`);
         return response.data;
     } catch (error) {
