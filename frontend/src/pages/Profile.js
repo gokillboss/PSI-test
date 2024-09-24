@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { Form, Button, Container, Row, Col, Card } from 'react-bootstrap';
-import { getUserProfile, updateUserProfile } from '../services/api';
-import './profile.css';  // Import file CSS cho các tùy chỉnh giao diện
+import React, { useState, useEffect } from "react";
+import { Form, Button, Container, Row, Col, Card } from "react-bootstrap";
+import { getUserProfile, updateUserProfile } from "../services/api";
+import "./profile.css"; // Import file CSS cho các tùy chỉnh giao diện
 
 const Profile = () => {
   const [profile, setProfile] = useState({});
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
@@ -19,29 +19,29 @@ const Profile = () => {
         setFirstName(res.data.firstName);
         setLastName(res.data.lastName);
         setEmail(res.data.email);
-        setPhone(res.data.phoneNumber);  // Sử dụng phoneNumber thay vì phone
+        setPhone(res.data.phoneNumber); // Sử dụng phoneNumber thay vì phone
       } catch (error) {
-        console.error('Error fetching profile', error);
+        console.error("Error fetching profile", error);
       }
     };
-  
+
     fetchProfile();
   }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append('firstName', firstName);
-    formData.append('lastName', lastName);
-    formData.append('email', email);
-    formData.append('phone', phone);
+    formData.append("firstName", firstName);
+    formData.append("lastName", lastName);
+    formData.append("email", email);
+    formData.append("phone", phone);
 
     try {
       const res = await updateUserProfile(formData);
       setProfile(res.data);
       setIsEditing(false); // Exit edit mode after saving
     } catch (error) {
-      console.error('Error updating profile', error);
+      console.error("Error updating profile", error);
     }
   };
 
@@ -58,22 +58,26 @@ const Profile = () => {
                 <div>
                   <Row>
                     <Col md="12">
-                      <p><strong>Họ tên:</strong> {profile.firstName} {profile.lastName}</p>
-                      <p><strong>Email:</strong> {profile.email}</p>
-                      <p><strong>Số điện thoại:</strong> {profile.phoneNumber}</p>
+                      <p>
+                        <strong>Họ tên:</strong> {profile.firstName}{" "}
+                        {profile.lastName}
+                      </p>
+                      <p>
+                        <strong>Email:</strong> {profile.email}
+                      </p>
+                      <p>
+                        <strong>Số điện thoại:</strong> {profile.phoneNumber}
+                      </p>
                     </Col>
                   </Row>
-                  <Button 
-                    variant="primary" 
-                    onClick={() => setIsEditing(true)} 
+                  <Button
+                    variant="primary"
+                    onClick={() => setIsEditing(true)}
                     className="mr-3 profile-btn"
                   >
                     Chỉnh sửa
                   </Button>
-                  <Button 
-                    variant="primary " 
-                    className="ml-3 profile-btn"
-                  >
+                  <Button variant="primary " className="ml-3 profile-btn">
                     Đổi mật khẩu
                   </Button>
                 </div>
@@ -83,44 +87,44 @@ const Profile = () => {
                     <Col md="12">
                       <Form.Group controlId="formFirstName">
                         <Form.Label>Họ</Form.Label>
-                        <Form.Control 
-                          type="text" 
-                          value={firstName} 
-                          onChange={(e) => setFirstName(e.target.value)} 
-                          placeholder="Nhập họ" 
+                        <Form.Control
+                          type="text"
+                          value={firstName}
+                          onChange={(e) => setFirstName(e.target.value)}
+                          placeholder="Nhập họ"
                           className="form-input"
                         />
                       </Form.Group>
 
                       <Form.Group controlId="formLastName">
                         <Form.Label>Tên</Form.Label>
-                        <Form.Control 
-                          type="text" 
-                          value={lastName} 
-                          onChange={(e) => setLastName(e.target.value)} 
-                          placeholder="Nhập tên" 
+                        <Form.Control
+                          type="text"
+                          value={lastName}
+                          onChange={(e) => setLastName(e.target.value)}
+                          placeholder="Nhập tên"
                           className="form-input"
                         />
                       </Form.Group>
 
                       <Form.Group controlId="formEmail">
                         <Form.Label>Email</Form.Label>
-                        <Form.Control 
-                          type="email" 
-                          value={email} 
-                          onChange={(e) => setEmail(e.target.value)} 
-                          placeholder="Nhập email" 
+                        <Form.Control
+                          type="email"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          placeholder="Nhập email"
                           className="form-input"
                         />
                       </Form.Group>
 
                       <Form.Group controlId="formPhone">
                         <Form.Label>Số điện thoại</Form.Label>
-                        <Form.Control 
-                          type="text" 
-                          value={phone} 
-                          onChange={(e) => setPhone(e.target.value)} 
-                          placeholder="Nhập số điện thoại" 
+                        <Form.Control
+                          type="text"
+                          value={phone}
+                          onChange={(e) => setPhone(e.target.value)}
+                          placeholder="Nhập số điện thoại"
                           className="form-input"
                         />
                       </Form.Group>
@@ -130,7 +134,10 @@ const Profile = () => {
                   <Button variant="primary" type="submit" className="mr-3">
                     Lưu
                   </Button>
-                  <Button variant="secondary" onClick={() => setIsEditing(false)}>
+                  <Button
+                    variant="secondary"
+                    onClick={() => setIsEditing(false)}
+                  >
                     Hủy
                   </Button>
                 </Form>

@@ -1,52 +1,51 @@
 .profile-container {
-    margin-top: 50px;
+  margin-top: 50px;
 }
 
 .profile-card {
-    border-radius: 10px;
-    background-color: #ffffff;
-    border: none;
-    padding: 30px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  background-color: #ffffff;
+  border: none;
+  padding: 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .profile-title {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: #007bff;
-    margin-bottom: 20px;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #007bff;
+  margin-bottom: 20px;
 }
 
 .profile-info p {
-    font-size: 1.1rem;
-    margin-bottom: 10px;
+  font-size: 1.1rem;
+  margin-bottom: 10px;
 }
 
 .form-input {
-    border-radius: 5px;
-    padding: 10px;
-    font-size: 1rem;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 1rem;
 }
 
 .profile-btn {
-    border-radius: 5px;
-    margin: auto;
-    font-size: 1rem;
-    transition: background-color 0.3s ease;
-    margin-right: 10px; 
+  border-radius: 5px;
+  margin: auto;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  margin-right: 10px;
 }
 
 .profile-btn:hover {
-    opacity: 0.9;
+  opacity: 0.9;
 }
 
 .profile-btn:focus {
-    outline: none;
-    box-shadow: none;
+  outline: none;
+  box-shadow: none;
 }
 
 /* Nếu muốn thêm hiệu ứng màu sắc khi hover vào các nút */
 .profile-btn.primary:hover {
-    background-color: #0056b3;
+  background-color: #0056b3;
 }
-

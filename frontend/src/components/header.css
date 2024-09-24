@@ -1,105 +1,111 @@
 .custom-navbar {
-    background-color: #e3ebf7; /* Light blue background */
-    border-bottom: 3px solid #3498db; /* Darker blue border */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Light shadow for subtle depth */
-    transition: background-color 0.4s ease-in-out; /* Smooth background transition */
+  background-color: #e3ebf7; /* Light blue background */
+  border-bottom: 3px solid #3498db; /* Darker blue border */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Light shadow for subtle depth */
+  transition: background-color 0.4s ease-in-out; /* Smooth background transition */
 }
 
 .custom-navbar:hover {
-    background-color: #d1e2f0; /* Slightly darker on hover */
+  background-color: #d1e2f0; /* Slightly darker on hover */
 }
 
 .custom-navbar .navbar-brand {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: #3498db; /* Darker blue for branding */
-    text-transform: uppercase;
-    transition: color 0.3s ease, letter-spacing 0.3s ease; /* Smooth color and letter spacing transition */
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #3498db; /* Darker blue for branding */
+  text-transform: uppercase;
+  transition:
+    color 0.3s ease,
+    letter-spacing 0.3s ease; /* Smooth color and letter spacing transition */
 }
 
 .custom-navbar .navbar-brand:hover {
-    color: #2980b9; /* Slightly darker blue on hover */
-    letter-spacing: 1px; /* Subtle increase in letter spacing */
+  color: #2980b9; /* Slightly darker blue on hover */
+  letter-spacing: 1px; /* Subtle increase in letter spacing */
 }
 
 .custom-link {
-    color: #5d6d7e; /* Soft grayish-blue for links */
-    margin-right: 15px;
-    font-size: 1.2rem;
-    transition: color 0.3s ease, transform 0.3s ease; /* Smooth color and scale transitions */
-    position: relative;
-    overflow: hidden;
+  color: #5d6d7e; /* Soft grayish-blue for links */
+  margin-right: 15px;
+  font-size: 1.2rem;
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease; /* Smooth color and scale transitions */
+  position: relative;
+  overflow: hidden;
 }
 
 .custom-link:hover {
-    color: #2980b9; /* Blue on hover */
-    transform: translateY(-2px); /* Gentle lift on hover */
+  color: #2980b9; /* Blue on hover */
+  transform: translateY(-2px); /* Gentle lift on hover */
 }
 
 .custom-link::before {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 3px;
-    bottom: 0;
-    left: 0;
-    background-color: #2980b9; /* Underline blue on hover */
-    transition: width 0.3s ease;
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 3px;
+  bottom: 0;
+  left: 0;
+  background-color: #2980b9; /* Underline blue on hover */
+  transition: width 0.3s ease;
 }
 
 .custom-link:hover::before {
-    width: 100%; /* Full-width underline on hover */
+  width: 100%; /* Full-width underline on hover */
 }
 
 @keyframes subtleFade {
-    0% {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .custom-link {
-    animation: subtleFade 0.8s ease forwards; /* Gentle fade-in animation */
+  animation: subtleFade 0.8s ease forwards; /* Gentle fade-in animation */
 }
 
 .custom-button {
-    margin-left: 15px;
-    background-color: #3498db; /* Initial dark blue */
-    border: 2px solid #3498db;
-    color: #ffffff;
-    padding: 10px 20px;
-    border-radius: 50px; /* Rounded button */
-    font-size: 1rem;
-    font-weight: bold;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Slight shadow for depth */
-    transition: background-color 0.3s ease, transform 0.3s ease;
+  margin-left: 15px;
+  background-color: #3498db; /* Initial dark blue */
+  border: 2px solid #3498db;
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 50px; /* Rounded button */
+  font-size: 1rem;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Slight shadow for depth */
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
 }
 
 .custom-button:hover {
-    background-color: #2980b9; /* Darker blue on hover */
-    transform: scale(1.05); /* Slight scale on hover */
+  background-color: #2980b9; /* Darker blue on hover */
+  transform: scale(1.05); /* Slight scale on hover */
 }
 
 .custom-button:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(41, 128, 185, 0.4); /* Blue focus ring */
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(41, 128, 185, 0.4); /* Blue focus ring */
 }
 
 @keyframes buttonSlideIn {
-    0% {
-        opacity: 0;
-        transform: translateX(-100px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateX(0);
-    }
+  0% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .custom-button {
-    animation: buttonSlideIn 0.8s ease forwards; /* Smooth slide-in animation */
+  animation: buttonSlideIn 0.8s ease forwards; /* Smooth slide-in animation */
 }

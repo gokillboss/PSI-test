@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { Button } from 'react-bootstrap';
-import { FaArrowUp } from 'react-icons/fa';
-import './ScrollToTopButton.css'; 
+import React, { useState, useEffect } from "react";
+import { Button } from "react-bootstrap";
+import { FaArrowUp } from "react-icons/fa";
+import "./ScrollToTopButton.css";
 const ScrollToTopButton = () => {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -16,23 +16,28 @@ const ScrollToTopButton = () => {
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth'
+      behavior: "smooth",
     });
   };
 
   useEffect(() => {
-    window.addEventListener('scroll', toggleVisibility);
+    window.addEventListener("scroll", toggleVisibility);
     return () => {
-      window.removeEventListener('scroll', toggleVisibility);
+      window.removeEventListener("scroll", toggleVisibility);
     };
   }, []);
 
   return (
     <div className="scroll-to-top">
-      {isVisible && 
-        <Button onClick={scrollToTop} variant="primary" className="scroll-button">
+      {isVisible && (
+        <Button
+          onClick={scrollToTop}
+          variant="primary"
+          className="scroll-button"
+        >
           <FaArrowUp />
-        </Button>}
+        </Button>
+      )}
     </div>
   );
 };
