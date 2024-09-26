@@ -42,8 +42,10 @@ const Footer = () => {
         </Row>
       </Container>
       <div className="footer-bottom text-center p-3">
-        © 2024 Thi Nail All rights reserved:  
-        <a className="text-light" href="https://thinail.com/">thinail.com</a>
+        © 2024 Thi Nail All rights reserved :    
+        <a className="text-light mx-2" href="https://thinail.com/">thinail.com</a>
+        <span className="mx-2">|</span>
+        <a className="text-light ms-2" href="/terms-of-service">Điều khoản Dịch vụ</a>
       </div>
     </footer>
   );

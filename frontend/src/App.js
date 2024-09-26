@@ -17,7 +17,7 @@ import FindPassword from './pages/Auth/FindPassword';
 import { Container } from 'react-bootstrap';
 import PaymentSuccessPage from './pages/PaymentSuccessPage';
 import ResetPassword from './pages/Auth/ResetPassword';
-
+import TermsOfService from './components/TermOfService';
 
 const App = () => {
     return (
@@ -40,6 +40,7 @@ const App = () => {
                     </Route>
                     <Route path='/findPassword' element={<FindPassword />} />
                     <Route path='/resetPassword/:token' element={<ResetPassword />} />
+                    <Route path='/terms-of-service' element={<TermsOfService />} />
                 </Routes>
             </Container>
             <Footer />
