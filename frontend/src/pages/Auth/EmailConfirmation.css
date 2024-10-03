@@ -1,0 +1,40 @@
+.email-confirmation-container {
+    background-color: #f8f9fa;
+  }
+  
+  .email-confirmation-card {
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    margin-top: 8rem; 
+  }
+  
+  .email-confirmation-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  }
+  
+  .icon-large {
+    font-size: 4rem;
+  }
+  
+  .btn-primary {
+    border-radius: 25px;
+    padding: 10px 30px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+  }
+  
+  h3 {
+    font-weight: 600;
+    color: #333;
+  }
+  
+  p {
+    color: #666;
+  }

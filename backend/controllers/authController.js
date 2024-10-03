@@ -21,7 +21,7 @@ exports.signup = async (req, res) => {
         // Tạo token để xác thực email
         const emailToken = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
-        const url = `http://localhost:${process.env.PORT}/api/auth/confirm/${emailToken}`;
+        const url = `${process.env.CLIENT_URL}/confirm/${emailToken}`;
 
         // Gửi email xác thực
         console.log('Sending email...' + email);
