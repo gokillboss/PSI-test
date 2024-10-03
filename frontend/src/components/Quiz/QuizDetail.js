@@ -114,7 +114,7 @@ const QuizDetail = () => {
     }
 
     return (
-        <Container>
+        <Container className='my-3'>
             <h2 className="my-4">{quiz.title}</h2>
             <Form onSubmit={handleSubmit}>
                 {paginatedQuestions.map((question, index) => (

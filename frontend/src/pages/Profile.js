@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Container, Row, Col, Card } from 'react-bootstrap';
 import { getUserProfile, updateUserProfile } from '../services/api';
-import './profile.css';  // Import file CSS cho các tùy chỉnh giao diện
-
+import './profile.css'; 
 const Profile = () => {
   const [profile, setProfile] = useState({});
   const [firstName, setFirstName] = useState('');
@@ -19,7 +18,7 @@ const Profile = () => {
         setFirstName(res.data.firstName);
         setLastName(res.data.lastName);
         setEmail(res.data.email);
-        setPhone(res.data.phoneNumber);  // Sử dụng phoneNumber thay vì phone
+        setPhone(res.data.phoneNumber); 
       } catch (error) {
         console.error('Error fetching profile', error);
       }

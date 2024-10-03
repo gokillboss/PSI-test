@@ -1,21 +1,21 @@
 .login-card {
-    background: #ffffff; /* Nền trắng tinh tế */
-    border-radius: 20px; /* Bo tròn hơn */
+    background: #ffffff; 
+    border-radius: 20px; 
     padding: 40px;
-    margin-top: 8rem; /* Vị trí card */
-    transition: transform 0.4s ease, box-shadow 0.4s ease; /* Thêm hiệu ứng di chuyển và đổ bóng */
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+    margin-top: 8rem; 
+    transition: transform 0.4s ease, box-shadow 0.4s ease; 
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); 
 }
 
 
 .login-title {
-    font-family: 'Roboto', sans-serif; /* Font chữ hiện đại */
-    font-weight: 700; /* Đậm hơn cho tiêu đề */
-    color: #333; /* Màu tối hơn cho tiêu đề */
+    font-family: 'Roboto', sans-serif; 
+    font-weight: 700;
+    color: #333; 
     font-size: 2rem;
     text-align: center;
-    margin-bottom: 20px; /* Thêm khoảng cách dưới tiêu đề */
-    animation: fadeInDown 0.7s ease; /* Hiệu ứng tiêu đề */
+    margin-bottom: 20px; 
+    animation: fadeInDown 0.7s ease; 
 }
 
 @keyframes fadeInDown {
@@ -30,20 +30,20 @@
 }
 
 .login-btn {
-    background-color: #28a745; /* Màu xanh lá cho nút */
+    background-color: #28a745; 
     border: none;
     padding: 12px;
     font-size: 18px;
     width: 100%;
-    border-radius: 50px; /* Cạnh bo tròn */
+    border-radius: 50px;
     color: #fff;
     font-weight: bold;
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .login-btn:hover {
-    background-color: #218838; /* Màu xanh lá đậm hơn khi hover */
-    transform: translateY(-3px); /* Nhấc nhẹ nút khi hover */
+    background-color: #218838;
+    transform: translateY(-3px); 
 }
 
 input.form-control {
@@ -56,7 +56,7 @@ input.form-control {
 }
 
 input.form-control:focus {
-    border-color: #28a745; /* Đổi màu đường viền khi focus */
-    box-shadow: 0 0 5px rgba(40, 167, 69, 0.5); /* Thêm ánh sáng xanh lá khi focus */
+    border-color: #28a745;
+    box-shadow: 0 0 5px rgba(40, 167, 69, 0.5); 
 }
 

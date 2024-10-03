@@ -11,7 +11,7 @@ const FindPassword = () => {
     const [maskedEmail, setMaskedEmail] = useState('');
     const [timer, setTimer] = useState(0);
     const [canResend, setCanResend] = useState(false);
-    const [isSubmitting, setIsSubmitting] = useState(false);  // Trạng thái đang xử lý
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     useEffect(() => {
         if (timer > 0) {

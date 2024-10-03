@@ -8,7 +8,7 @@ const ResetPassword = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [successMessage, setSuccessMessage] = useState(null);
     const [errorMessage, setErrorMessage] = useState(null);
-    const [passwordError, setPasswordError] = useState(null); // Để kiểm tra độ mạnh của mật khẩu
+    const [passwordError, setPasswordError] = useState(null); 
     const { token } = useParams();
     const navigate = useNavigate();
 

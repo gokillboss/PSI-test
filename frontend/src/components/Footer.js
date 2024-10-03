@@ -27,7 +27,7 @@ const Footer = () => {
                 <li>
                   <p>
                     <FontAwesomeIcon icon={faEnvelope} className="contact-icon" /> 
-                    Email: <a href="mailto:info@nailcertification.com" className="text-light">info@nailcertification.com</a>
+                    <a href="mailto:info@nailcertification.com" className="text-light">Email: info@nailcertification.com</a>
                   </p>
                 </li>
                 <li>
@@ -45,7 +45,7 @@ const Footer = () => {
         © 2024 Thi Nail All rights reserved :    
         <a className="text-light mx-2" href="https://thinail.com/">thinail.com</a>
         <span className="mx-2">|</span>
-        <a className="text-light ms-2" href="/terms-of-service">Điều khoản Dịch vụ</a>
+        <a className="text-light ms-2" href="/terms-of-service">Điều Khoản Dịch vụ</a>
       </div>
     </footer>
   );

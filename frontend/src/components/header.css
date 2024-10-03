@@ -1,32 +1,30 @@
 .custom-navbar {
-    background-color: #e3ebf7; /* Light blue background */
-    border-bottom: 3px solid #3498db; /* Darker blue border */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Light shadow for subtle depth */
-    transition: background-color 0.4s ease-in-out; /* Smooth background transition */
+    background-color: #e3ebf7;
+    border-bottom: 3px solid #3498db;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    transition: background-color 0.4s ease-in-out; 
+   
 }
 
-.custom-navbar:hover {
-    background-color: #d1e2f0; /* Slightly darker on hover */
-}
 
 .custom-navbar .navbar-brand {
     font-size: 1.8rem;
     font-weight: bold;
-    color: #3498db; /* Darker blue for branding */
+    color: #3498db;
     text-transform: uppercase;
-    transition: color 0.3s ease, letter-spacing 0.3s ease; /* Smooth color and letter spacing transition */
+    transition: color 0.3s ease, letter-spacing 0.3s ease; 
 }
 
 .custom-navbar .navbar-brand:hover {
-    color: #2980b9; /* Slightly darker blue on hover */
+    color: #e3e9ec; /* Slightly darker blue on hover */
     letter-spacing: 1px; /* Subtle increase in letter spacing */
 }
 
 .custom-link {
-    color: #5d6d7e; /* Soft grayish-blue for links */
+    color: #5d6d7e; 
     margin-right: 15px;
     font-size: 1.2rem;
-    transition: color 0.3s ease, transform 0.3s ease; /* Smooth color and scale transitions */
+    transition: color 0.3s ease, transform 0.3s ease; 
     position: relative;
     overflow: hidden;
 }
@@ -72,7 +70,7 @@
     border: 2px solid #3498db;
     color: #ffffff;
     padding: 10px 20px;
-    border-radius: 50px; /* Rounded button */
+    border-radius: 50px;
     font-size: 1rem;
     font-weight: bold;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Slight shadow for depth */

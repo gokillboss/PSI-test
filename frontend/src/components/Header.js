@@ -1,16 +1,39 @@
 import React from 'react';
 import { Navbar, Nav, Container, Button } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
-import './header.css';  // Assuming you will create this CSS file for custom styles
+import { jwtDecode } from 'jwt-decode';
+import './header.css'; 
 
 const Header = () => {
     const navigate = useNavigate();
 
+    // Function to check if the token is valid
     const isAuthenticated = () => {
         const token = localStorage.getItem('token');
-        return !!token;  // Returns true if token exists, false otherwise
+        
+        if (!token) {
+            return false;
+        }
+
+        try {
+            const decodedToken = jwtDecode(token);
+            const currentTime = Date.now() / 1000; // Current time in seconds
+            
+            // Check if token is expired
+            if (decodedToken.exp < currentTime) {
+                localStorage.removeItem('token'); // Remove expired token
+                return false;
+            }
+
+            return true;
+        } catch (error) {
+            // If token is invalid, remove it and return false
+            localStorage.removeItem('token');
+            return false;
+        }
     };
 
+    // Function to handle logout
     const handleLogout = () => {
         localStorage.removeItem('token');
         navigate('/login');
