@@ -12,7 +12,8 @@ import {
   InputGroup,
 } from "react-bootstrap";
 import { register } from "../../services/api";
-import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import icon con mắt từ react-icons
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { EnvelopeCheckFill } from 'react-bootstrap-icons';
 import "./register.css";
 
 const Register = () => {
@@ -217,28 +218,31 @@ const Register = () => {
         </Col>
       </Row>
 
-      <Modal show={showConfirmationModal} onHide={handleCloseModal} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Xác Nhận Email</Modal.Title>
-        </Modal.Header>
-        <Modal.Body className="">
-         
-          <p>
-            Cảm ơn bạn đã đăng ký! Chúng tôi đã gửi một email xác nhận đến{" "}
-            {email}.
-          </p>
-          <p>
-            Vui lòng kiểm tra hộp thư đến của bạn và nhấp vào liên kết xác nhận
-            để hoàn tất quá trình đăng ký.
-          </p>
-        </Modal.Body>
-        <Modal.Footer className="d-flex justify-content-center align-items-center">
-         
-          <Button variant="primary" onClick={handleCloseModal}>
-            Đã Hiểu
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      <Modal show={showConfirmationModal} onHide={handleCloseModal} centered className="confirmation-modal">
+      <Modal.Header closeButton className="border-0">
+        <Modal.Title className="w-100 text-center">Xác Nhận Email</Modal.Title>
+      </Modal.Header>
+      <Modal.Body className="text-center py-4">
+        <EnvelopeCheckFill className="text-primary mb-3" size={50} />
+        <h4 className="mb-3">Cảm ơn bạn đã đăng ký!</h4>
+        <p className="mb-2">
+          Chúng tôi đã gửi một email xác nhận đến:
+        </p>
+        <p className="email-highlight mb-3">{email}</p>
+        <p>
+          Vui lòng kiểm tra hộp thư đến của bạn và nhấp vào liên kết xác nhận
+          để hoàn tất quá trình đăng ký.
+        </p>
+      </Modal.Body>
+      <Modal.Footer className="border-0 justify-content-center pb-4">
+        <Button variant="primary" onClick={handleCloseModal} className="px-4 py-2">
+          Đóng và Đăng nhập
+        </Button>
+      </Modal.Footer>
+    </Modal>
+
+
+
     </Container>
   );
 };

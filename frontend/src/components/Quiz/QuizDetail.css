@@ -1,0 +1,26 @@
+.card {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border: none;
+}
+
+.form-check-input:checked {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.text-success {
+    font-weight: bold;
+}
+
+.text-danger {
+    text-decoration: line-through;
+}
+
+.progress {
+    height: 25px;
+}
+
+.progress-bar {
+    font-size: 0.9rem;
+    line-height: 25px;
+}

@@ -1,34 +1,42 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { Container, Row, Col, Button, Form, Alert } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+import { Container, Row, Col, Button, Form, Alert, Card, ProgressBar } from 'react-bootstrap';
 import { getQuiz, submitQuiz } from '../../services/api';
-
-
+import './QuizDetail.css';
 
 const shuffleArray = (array) => {
-    return array.sort(() => Math.random() - 0.5);
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
 };
 
 const QuizDetail = () => {
     const { id } = useParams();
     const [quiz, setQuiz] = useState(null);
+    const [randomizedQuestions, setRandomizedQuestions] = useState([]);
     const [answers, setAnswers] = useState({});
     const [results, setResults] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
     const navigate = useNavigate();
 
-    const questionsPerPage = 10;
+    const questionsPerPage = 5;
 
     useEffect(() => {
         const fetchQuiz = async () => {
             try {
                 const response = await getQuiz(id);
                 const quizData = response.data;
-                quizData.questions.forEach(question => {
-                    question.options = shuffleArray(question.options);
-                });
                 setQuiz(quizData);
+
+                // Randomize questions and their options
+                const shuffledQuestions = shuffleArray(quizData.questions).map(question => ({
+                    ...question,
+                    options: shuffleArray(question.options)
+                }));
+                setRandomizedQuestions(shuffledQuestions);
             } catch (error) {
                 console.error('Error fetching quiz', error);
             }
@@ -68,95 +76,125 @@ const QuizDetail = () => {
 
     const startIndex = (currentPage - 1) * questionsPerPage;
     const endIndex = startIndex + questionsPerPage;
-    const paginatedQuestions = quiz ? quiz.questions.slice(startIndex, endIndex) : [];
+    const paginatedQuestions = randomizedQuestions.slice(startIndex, endIndex);
 
-    if (!quiz) {
-        return <div>Loading...</div>;
+    if (!quiz || randomizedQuestions.length === 0) {
+        return (
+            <Container className="d-flex justify-content-center align-items-center vh-100">
+                <div className="spinner-border text-primary" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </div>
+            </Container>
+        );
     }
 
     if (results) {
         return (
-            <Container>
-                <h2 className="my-4">{quiz.title} - Results</h2>
-                <Alert variant="info">
-                    Your score: {results.score} out of {results.totalQuestions}
-                </Alert>
-                {results.results.map((result, index) => (
-                    <Row key={result.questionId} className="mb-4">
-                        <Col md={8}>
-                            <h5>{`${index + 1}. ${result.questionText}`}</h5>
-                            {quiz.questions.find(q => q._id === result.questionId).options.map((option) => {
-                                const isSelected = result.selectedOption === option.text;
-                                const isCorrect = option.text === result.correctOption;
-                                const style = {
-                                    color: isCorrect ? 'green' : (isSelected ? 'red' : 'black'),
-                                    fontWeight: isCorrect ? 'bold' : 'normal',
-                                };
-                                return (
-                                    <div key={option._id} style={style}>
+            <Container className="my-5">
+                <h2 className="text-center mb-4">{quiz.title} - Results</h2>
+                <Card className="mb-4">
+                    <Card.Body>
+                        <Alert variant="info">
+                            <Alert.Heading>Your Score</Alert.Heading>
+                            <p className="mb-0">You scored {results.score} out of {results.totalQuestions}</p>
+                        </Alert>
+                        <ProgressBar
+                            now={(results.score / results.totalQuestions) * 100}
+                            label={`${Math.round((results.score / results.totalQuestions) * 100)}%`}
+                            className="mt-3"
+                        />
+                    </Card.Body>
+                </Card>
+                {results.results.map((result, index) => {
+                    const question = randomizedQuestions.find(q => q._id === result.questionId);
+                    return (
+                        <Card key={result.questionId} className="mb-3">
+                            <Card.Header>
+                                <h5 className="mb-0">{`${index + 1}. ${question.questionText}`}</h5>
+                            </Card.Header>
+                            <Card.Body>
+                                {question.options.map((option) => {
+                                    const isSelected = result.selectedOption === option.text;
+                                    const isCorrect = option.text === result.correctOption;
+                                    return (
                                         <Form.Check
+                                            key={option._id}
                                             type="radio"
-                                            name={result.questionId}
-                                            value={option.text}
+                                            id={`${result.questionId}-${option._id}`}
                                             label={option.text}
                                             checked={isSelected}
-                                            readOnly
+                                            disabled
+                                            className={`${isCorrect ? 'text-success' : (isSelected ? 'text-danger' : '')}`}
                                         />
-                                    </div>
-                                );
-                            })}
-                        </Col>
-                    </Row>
-                ))}
-                <Button variant="primary" onClick={() => navigate('/quizzes')}>Back to Quizzes</Button>
+                                    );
+                                })}
+                            </Card.Body>
+                        </Card>
+                    );
+                })}
+                <div className="text-center">
+                    <Button variant="primary" onClick={() => navigate('/quizzes')}>Back to Quizzes</Button>
+                </div>
             </Container>
         );
     }
 
     return (
-        <Container className='my-3'>
-            <h2 className="my-4">{quiz.title}</h2>
-            <Form onSubmit={handleSubmit}>
-                {paginatedQuestions.map((question, index) => (
-                    <Row key={question._id} className="mb-4">
-                        <Col md={8}>
-                            <h5>{`${startIndex + index + 1}. ${question.questionText}`}</h5>
-                            {question.options.map((option) => (
-                                <Form.Check
-                                    key={option._id}
-                                    type="radio"
-                                    name={question._id}
-                                    value={option.text}
-                                    label={option.text}
-                                    onChange={() => handleChange(question._id, option.text)}
-                                />
-                            ))}
-                        </Col>
-                    </Row>
-                ))}
-                <div className="d-flex justify-content-between">
-                    <Button
-                        variant="secondary"
-                        onClick={handlePreviousPage}
-                        disabled={currentPage === 1}
-                    >
-                        Previous
-                    </Button>
-                    <Button
-                        variant="primary"
-                        type="submit"
-                    >
-                        Submit
-                    </Button>
-                    <Button
-                        variant="secondary"
-                        onClick={handleNextPage}
-                        disabled={endIndex >= quiz.questions.length}
-                    >
-                        Next
-                    </Button>
-                </div>
-            </Form>
+        <Container className="my-5">
+            <h2 className="text-center mb-4">{quiz.title}</h2>
+            <Card>
+                <Card.Body>
+                    <Form onSubmit={handleSubmit}>
+                        {paginatedQuestions.map((question, index) => (
+                            <div key={question._id} className="mb-4">
+                                <h5>{`${startIndex + index + 1}. ${question.questionText}`}</h5>
+                                {question.options.map((option) => (
+                                    <Form.Check
+                                        key={option._id}
+                                        type="radio"
+                                        id={`${question._id}-${option._id}`}
+                                        name={question._id}
+                                        value={option.text}
+                                        label={option.text}
+                                        onChange={() => handleChange(question._id, option.text)}
+                                        className="my-2"
+                                    />
+                                ))}
+                            </div>
+                        ))}
+                        <Row className="mt-4">
+                            <Col>
+                                <Button
+                                    variant="secondary"
+                                    onClick={handlePreviousPage}
+                                    disabled={currentPage === 1}
+                                >
+                                    Previous
+                                </Button>
+                            </Col>
+                            <Col className="text-center">
+                                <Button variant="primary" type="submit">
+                                    Submit
+                                </Button>
+                            </Col>
+                            <Col className="d-flex justify-content-end">
+                                <Button
+                                    variant="secondary"
+                                    onClick={handleNextPage}
+                                    disabled={endIndex >= randomizedQuestions.length}
+                                >
+                                    Next
+                                </Button>
+                            </Col>
+                        </Row>
+                    </Form>
+                </Card.Body>
+            </Card>
+            <ProgressBar
+                now={(currentPage / Math.ceil(randomizedQuestions.length / questionsPerPage)) * 100}
+                label={`${Math.round((currentPage / Math.ceil(randomizedQuestions.length / questionsPerPage)) * 100)}%`}
+                className="mt-4"
+            />
         </Container>
     );
 };

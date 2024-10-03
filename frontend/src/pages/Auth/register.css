@@ -38,3 +38,39 @@ input.form-control:focus {
     border-color: #007bff;
     box-shadow: none;
 }
+
+
+.confirmation-modal .modal-content {
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .confirmation-modal .modal-header {
+    padding-top: 20px;
+  }
+  
+  .confirmation-modal .modal-title {
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .confirmation-modal .modal-body {
+    padding: 30px 40px;
+  }
+  
+  .confirmation-modal .email-highlight {
+    font-weight: 600;
+    color: #007bff;
+    font-size: 1.1em;
+  }
+  
+  .confirmation-modal .btn-primary {
+    border-radius: 25px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+  
+  .confirmation-modal .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+  }
