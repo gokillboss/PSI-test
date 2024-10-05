@@ -41,7 +41,7 @@ const ResetPassword = () => {
             await resetPassword(token, { password });
             setSuccessMessage('Mật khẩu đã được cập nhật.');
             setErrorMessage(null);
-            setTimeout(() => navigate('/login'), 3000); // Chuyển hướng về trang đăng nhập sau 3 giây
+            setTimeout(() => navigate('/login'), 3000);
         } catch (error) {
             setErrorMessage('Có lỗi xảy ra. Vui lòng thử lại.');
             setSuccessMessage(null);
@@ -49,13 +49,13 @@ const ResetPassword = () => {
     };
 
     return (
-        <Container className="min-vh-100 d-flex align-items-center justify-content-center">
+        <Container className="min-vh-100 d-flex justify-content-center" style={{marginTop : '8rem'}}>
             <Row className="w-100">
                 <Col md="6" lg="4" className="mx-auto">
                     <h2 className="text-center mb-4">Đặt lại mật khẩu</h2>
                     {successMessage && <Alert variant="success">{successMessage}</Alert>}
                     {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
-                    {passwordError && <Alert variant="danger">{passwordError}</Alert>} {/* Hiển thị lỗi mật khẩu không đủ mạnh */}
+                    {passwordError && <Alert variant="danger">{passwordError}</Alert>} 
                     <Form onSubmit={handleSubmit}>
                         <Form.Group controlId="formPassword" className="mb-3">
                             <Form.Control

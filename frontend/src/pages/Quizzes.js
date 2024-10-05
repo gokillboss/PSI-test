@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { Container, Row, Col, Card, Button } from 'react-bootstrap';
+import { Container, Row, Col, Card, Button, Badge } from 'react-bootstrap';
 import { getQuizzes, checkQuizPurchase, createCheckoutSession } from '../services/api';
 import { useNavigate } from 'react-router-dom';
 import { loadStripe } from '@stripe/stripe-js';
+import './Quizzes.css'; // Tạo file CSS riêng cho component này
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
@@ -53,26 +54,41 @@ const Quizzes = () => {
     };
 
     return (
-        <Container>
-            <h2 className="my-4">Available Quizzes</h2>
+        <Container className="quizzes-container">
+            <h2 className="text-center my-5">Available Quizzes</h2>
             <Row>
                 {quizzes.map(quiz => (
-                    <Col key={quiz._id} md={4} className="mb-4">
-                        <Card>
-                            <Card.Body>
-                                <Card.Title>
-                                    {quiz.title} {quiz.price > 0 && <span>(${quiz.price})</span>}
+                    <Col key={quiz._id} lg={4} md={6} className="mb-4">
+                        <Card className="quiz-card h-100 shadow-sm">
+                            <Card.Body className="d-flex flex-column">
+                                <Card.Title className="mb-3">
+                                    {quiz.title}
+                                    {quiz.price > 0 && (
+                                        <Badge bg="info" className="ms-2">
+                                            ${quiz.price}
+                                        </Badge>
+                                    )}
                                 </Card.Title>
-                                <Card.Text>{quiz.description}</Card.Text>
-                                {quiz.price === 0 || purchasedQuizzes[quiz._id] ? (
-                                    <Button variant="primary" onClick={() => handleStartTest(quiz._id)}>
-                                        Start Test
-                                    </Button>
-                                ) : (
-                                    <Button variant="success" onClick={() => handlePayment(quiz._id)}>
-                                        Pay
-                                    </Button>
-                                )}
+                                <Card.Text className="flex-grow-1">{quiz.description}</Card.Text>
+                                <div className="mt-auto">
+                                    {quiz.price === 0 || purchasedQuizzes[quiz._id] ? (
+                                        <Button 
+                                            variant="primary" 
+                                            onClick={() => handleStartTest(quiz._id)}
+                                            className="w-100"
+                                        >
+                                            Start Test
+                                        </Button>
+                                    ) : (
+                                        <Button 
+                                            variant="success" 
+                                            onClick={() => handlePayment(quiz._id)}
+                                            className="w-100"
+                                        >
+                                            Purchase
+                                        </Button>
+                                    )}
+                                </div>
                             </Card.Body>
                         </Card>
                     </Col>

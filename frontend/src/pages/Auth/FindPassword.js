@@ -97,7 +97,7 @@ const FindPassword = () => {
                                     <Link to="/login" className="text-decoration-none">Quay lại trang đăng nhập</Link>
                                 </div>
                                 <div className="text-center mt-3">
-                                    <p>Nếu gặp vấn đề, vui lòng liên hệ <a href="mailto:support@yourcompany.com" className="text-decoration-none">support@yourcompany.com</a>.</p>
+                                    <p>Nếu gặp vấn đề, vui lòng liên hệ <a href="mailto:support.thinail@gmail.com" className="text-decoration-none">support.thinail@gmail.com</a>.</p>
                                 </div>
                             </div>
                         )}

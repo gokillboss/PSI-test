@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getUserProfile, updateUserProfile } = require('../controllers/userController');
+const { getUserProfile, updateUserProfile, updatePassword } = require('../controllers/userController');
 const auth = require('../middlewares/authMiddleware');
 const multer = require('multer');
 
@@ -14,7 +14,8 @@ router.get('/', (req, res) => {
 
 
 router.get('/profile', auth, getUserProfile);
-router.post('/profile', auth, upload.single('avatar'), updateUserProfile);
+router.post('/profile', auth, updateUserProfile);
+router.post('/updatePassword', auth, updatePassword);
 
 
 

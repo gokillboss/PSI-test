@@ -29,6 +29,7 @@ export const resetPassword = (token, passwordData) => api.post(`/auth/resetPassw
 // User
 export const getUserProfile = () => api.get('/user/profile');
 export const updateUserProfile = (formData) => api.post('/user/profile', formData);
+export const updatePassword = (passwordData) => api.post('/user/updatePassword', passwordData);
 
 // Quiz
 export const getQuizzes = () => api.get('/test');
