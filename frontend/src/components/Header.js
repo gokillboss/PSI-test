@@ -50,7 +50,7 @@ const Header = () => {
                   onClick={handleLogout}
                   className="custom-button ms-2"
                 >
-                  <BoxArrowRight size={20} />
+                  <BoxArrowRight size={15} />
                 </Button>
               </>
             ) : (
