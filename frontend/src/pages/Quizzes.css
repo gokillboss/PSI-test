@@ -1,6 +1,8 @@
-.quizzes-container {
-  padding: 2rem 0;
+/* .quizzes-container {
+  background: url('../../src/assets/bang-nail.jpg') no-repeat center center/cover;
 }
+
+ */
 
 .quiz-card {
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
@@ -32,6 +34,6 @@
 
 @media (max-width: 768px) {
   .quiz-card {
-      margin-bottom: 1rem;
+    margin-bottom: 1rem;
   }
 }

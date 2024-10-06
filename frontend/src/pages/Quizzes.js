@@ -3,7 +3,7 @@ import { Container, Row, Col, Card, Button, Badge } from 'react-bootstrap';
 import { getQuizzes, checkQuizPurchase, createCheckoutSession } from '../services/api';
 import { useNavigate } from 'react-router-dom';
 import { loadStripe } from '@stripe/stripe-js';
-import './Quizzes.css'; // Tạo file CSS riêng cho component này
+import './Quizzes.css'; // Import CSS for styling
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
@@ -28,13 +28,21 @@ const Quizzes = () => {
             }));
             setPurchasedQuizzes(purchasedStatus);
         } catch (error) {
-            console.error('Error fetching quizzes or purchase data:', error);
+            console.error('Lỗi khi tải đề thi hoặc dữ liệu mua hàng:', error);
         }
     }, []);
 
     useEffect(() => {
         fetchQuizzes();
     }, [fetchQuizzes]);
+
+    // Dynamically set the background class based on quiz count
+    const getBackgroundClass = () => {
+        if (quizzes.length > 5) {
+            return 'background-alternate'; // Alternate background for more than 5 quizzes
+        }
+        return ''; // Default background for less than or equal to 5 quizzes
+    };
 
     const handleStartTest = (id) => {
         navigate(`/quizzes/${id}`);
@@ -46,16 +54,16 @@ const Quizzes = () => {
             const stripe = await stripePromise;
             const { error } = await stripe.redirectToCheckout({ sessionId: response.sessionId });
             if (error) {
-                console.error('Stripe checkout failed', error);
+                console.error('Thanh toán Stripe thất bại:', error);
             }
         } catch (error) {
-            console.error('Error creating checkout session', error);
+            console.error('Lỗi khi tạo phiên thanh toán:', error);
         }
     };
 
     return (
-        <Container className="quizzes-container">
-            <h2 className="text-center my-5">Available Quizzes</h2>
+        <Container className={`quizzes-container min-vh-100 ${getBackgroundClass()}`}>
+            <h2 className="text-center">Các Đề Thi Có Sẵn</h2>
             <Row>
                 {quizzes.map(quiz => (
                     <Col key={quiz._id} lg={4} md={6} className="mb-4">
@@ -77,7 +85,7 @@ const Quizzes = () => {
                                             onClick={() => handleStartTest(quiz._id)}
                                             className="w-100"
                                         >
-                                            Start Test
+                                            Bắt Đầu Thi
                                         </Button>
                                     ) : (
                                         <Button 
@@ -85,7 +93,7 @@ const Quizzes = () => {
                                             onClick={() => handlePayment(quiz._id)}
                                             className="w-100"
                                         >
-                                            Purchase
+                                            Mua Đề Thi
                                         </Button>
                                     )}
                                 </div>
