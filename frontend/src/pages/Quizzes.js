@@ -36,16 +36,8 @@ const Quizzes = () => {
         fetchQuizzes();
     }, [fetchQuizzes]);
 
-    // Dynamically set the background class based on quiz count
-    const getBackgroundClass = () => {
-        if (quizzes.length > 5) {
-            return 'background-alternate'; // Alternate background for more than 5 quizzes
-        }
-        return ''; // Default background for less than or equal to 5 quizzes
-    };
-
     const handleStartTest = (id) => {
-        navigate(`/quizzes/${id}`);
+        navigate(`/quizz/${id}`);
     };
 
     const handlePayment = async (id) => {
@@ -62,11 +54,28 @@ const Quizzes = () => {
     };
 
     return (
-        <Container className={`quizzes-container min-vh-100 ${getBackgroundClass()}`}>
-            <h2 className="text-center">Các Đề Thi Có Sẵn</h2>
+        <Container className="quizzes-container min-vh-100">
+            {/* Phần Giới Thiệu và Quảng Cáo */}
+            <Row className="align-items-center mb-5">
+                <h2 className="text-center mb-4">Thông Tin Quan Trọng</h2>
+                <p>
+                    Theo quy định của State Board, tất cả các ứng viên đều phải vượt qua kỳ thi chính thức để được cấp phép. Các bài thi thử của chúng tôi được thiết kế nhằm giúp bạn chuẩn bị và làm quen với cấu trúc của bài thi.
+                    Các bài thi này được xây dựng phù hợp với các yêu cầu hiện tại của State Board, đảm bảo rằng bạn đang ôn tập đúng nội dung cần thiết.
+                </p>
+                <p>
+                    Mục tiêu của chúng tôi là cung cấp cho bạn những công cụ cần thiết để vượt qua kỳ thi của mình. Hãy chắc chắn rằng bạn đã xem xét kỹ các quy định và yêu cầu, vì chúng có thể khác nhau giữa các tiểu bang. Chúc bạn ôn tập tốt và thi thành công!
+                </p>
+                <p>
+                    <strong>Đề thi có phí của chúng tôi bao gồm những câu hỏi chính thức mà có tỷ lệ cao sẽ xuất hiện trong đề thi thật của PSI.</strong> Phí <strong>10$</strong> được tính là cần thiết để duy trì hoạt động của website và cải thiện chất lượng các bài thi thử.
+                    <strong>Chúng tôi cam kết mang đến cho bạn trải nghiệm tốt nhất trong quá trình ôn tập và chuẩn bị cho kỳ thi.</strong>
+                </p>
+            </Row>
+
+            {/* Danh Sách Đề Thi */}
             <Row>
+                <h2 className="text-center mb-5">Đề Luyện Thi</h2>
                 {quizzes.map(quiz => (
-                    <Col key={quiz._id} lg={4} md={6} className="mb-4">
+                    <Col key={quiz._id} lg={3} md={6} className="mb-4">
                         <Card className="quiz-card h-100 shadow-sm">
                             <Card.Body className="d-flex flex-column">
                                 <Card.Title className="mb-3">
@@ -78,20 +87,20 @@ const Quizzes = () => {
                                     )}
                                 </Card.Title>
                                 <Card.Text className="flex-grow-1">{quiz.description}</Card.Text>
-                                <div className="mt-auto">
+                                <div className="mt-auto text-center"> {/* Thêm class text-center để căn giữa nội dung */}
                                     {quiz.price === 0 || purchasedQuizzes[quiz._id] ? (
-                                        <Button 
-                                            variant="primary" 
+                                        <Button
+                                            variant="primary"
                                             onClick={() => handleStartTest(quiz._id)}
-                                            className="w-100"
+                                            className="btn"
                                         >
                                             Bắt Đầu Thi
                                         </Button>
                                     ) : (
-                                        <Button 
-                                            variant="success" 
+                                        <Button
+                                            variant="success"
                                             onClick={() => handlePayment(quiz._id)}
-                                            className="w-100"
+                                            className="btn"
                                         >
                                             Mua Đề Thi
                                         </Button>

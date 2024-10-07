@@ -18,7 +18,9 @@ import { Container } from 'react-bootstrap';
 import PaymentSuccessPage from './pages/PaymentSuccessPage';
 import ResetPassword from './pages/Auth/ResetPassword';
 import TermsOfService from './components/TermOfService';
-import PracticeExam from './components/PracticeExam';
+import ExamPage from './pages/ExamPage';
+import Exam from './components/Exam/Exam.js';
+
 
 const App = () => {
     return (
@@ -33,12 +35,13 @@ const App = () => {
                     <Route path="/confirm/:token" element={<EmailConfirmation />} />
                     <Route element={<ProtectedRoute />}>
                         <Route path="/quizzes" element={<Quizzes />} />
-                        <Route path="/quizzes/:id" element={<QuizDetail />} />
+                        <Route path="/quizz/:id" element={<QuizDetail />} />
                         <Route path="/questions" element={<AllQuestions />} />
                         <Route path="/results/:id" element={<QuizResult />} />
                         <Route path="/profile" element={<Profile />} />
                         <Route path="/payment/success" element={<PaymentSuccessPage />} />
-                        <Route path="/practice-exam" element={<PracticeExam />} />
+                        <Route path="/practice-exam" element={<ExamPage />} />
+                        <Route path="/exam/:id" element={<Exam />} />
                     </Route>
                     <Route path='/findPassword' element={<FindPassword />} />
                     <Route path='/resetPassword/:token' element={<ResetPassword />} />

@@ -7,7 +7,8 @@ const userSchema = new Schema({
     lastName: { type: String, required: true },
     password: { type: String, required: true, minlength: 6 }, 
     phoneNumber: { type: String, default: '' },
-    isVerified: { type: Boolean, default: false }
+    isVerified: { type: Boolean, default: false },
+    isPremium: { type: Boolean, default: false },
 }, {
     timestamps: true
 });

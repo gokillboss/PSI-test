@@ -139,6 +139,7 @@ const QuizDetail = () => {
         );
     }
 
+    
     return (
         <Container className="my-5">
             <h2 className="text-center mb-4">{quiz.title}</h2>

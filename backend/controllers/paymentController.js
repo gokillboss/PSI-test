@@ -116,6 +116,48 @@ exports.verifyPurchase = async (req, res) => {
 
 
 
+// exports.handleStripeWebhook = async (req, res) => {
+//     const sig = req.headers['stripe-signature'];
+//     const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
+
+//     let event;
+
+//     try {
+//         event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
+//     } catch (err) {
+//         console.error(`⚠️  Webhook signature verification failed.`, err.message);
+//         return res.status(400).send(`Webhook Error: ${err.message}`);
+//     }
+
+//     switch (event.type) {
+//         case 'checkout.session.completed':
+//             const session = event.data.object;
+
+//             // Lưu giao dịch vào database
+//             try {
+//                 const transaction = new Transaction({
+//                     userId: session.metadata.userId,
+//                     quizId: session.metadata.quizId,
+//                     amount: session.amount_total / 100, // Stripe trả về số tiền ở dạng cents
+//                     transactionDate: new Date()
+//                 });
+
+//                 await transaction.save();
+
+//                 console.log('Transaction saved successfully');
+//             } catch (err) {
+//                 console.error('Error saving transaction:', err.message);
+//             }
+//             break;
+
+//         default:
+//             console.log(`Unhandled event type ${event.type}`);
+//     }
+
+//     res.status(200).send();
+// };
+
+
 exports.handleStripeWebhook = async (req, res) => {
     const sig = req.headers['stripe-signature'];
     const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
@@ -143,10 +185,19 @@ exports.handleStripeWebhook = async (req, res) => {
                 });
 
                 await transaction.save();
-
                 console.log('Transaction saved successfully');
+
+                // Cập nhật người dùng trở thành Premium
+                const user = await User.findById(session.metadata.userId);
+                if (user) {
+                    user.isPrimium = true; // Cập nhật trạng thái Primium
+                    await user.save();
+                    console.log('User upgraded to Premium');
+                } else {
+                    console.error('User not found');
+                }
             } catch (err) {
-                console.error('Error saving transaction:', err.message);
+                console.error('Error processing transaction or updating user:', err.message);
             }
             break;
 
