@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Container, Row, Col, Card, Button, Badge } from 'react-bootstrap';
+import './Quizzes.css';
 import { getQuizzes, checkQuizPurchase, createCheckoutSession } from '../services/api';
 import { useNavigate } from 'react-router-dom';
 import { loadStripe } from '@stripe/stripe-js';
-import './Quizzes.css'; // Import CSS for styling
+
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
@@ -54,9 +55,9 @@ const Quizzes = () => {
     };
 
     return (
-        <Container className="quizzes-container min-vh-100">
+        <Container className="quizzes-container my-5">
             {/* Phần Giới Thiệu và Quảng Cáo */}
-            <Row className="align-items-center mb-5">
+            {/* <Row className="align-items-center mb-5">
                 <h2 className="text-center mb-4">Thông Tin Quan Trọng</h2>
                 <p>
                     Theo quy định của State Board, tất cả các ứng viên đều phải vượt qua kỳ thi chính thức để được cấp phép. Các bài thi thử của chúng tôi được thiết kế nhằm giúp bạn chuẩn bị và làm quen với cấu trúc của bài thi.
@@ -69,7 +70,7 @@ const Quizzes = () => {
                     <strong>Đề thi có phí của chúng tôi bao gồm những câu hỏi chính thức mà có tỷ lệ cao sẽ xuất hiện trong đề thi thật của PSI.</strong> Phí <strong>10$</strong> được tính là cần thiết để duy trì hoạt động của website và cải thiện chất lượng các bài thi thử.
                     <strong>Chúng tôi cam kết mang đến cho bạn trải nghiệm tốt nhất trong quá trình ôn tập và chuẩn bị cho kỳ thi.</strong>
                 </p>
-            </Row>
+            </Row> */}
 
             {/* Danh Sách Đề Thi */}
             <Row>
@@ -87,7 +88,7 @@ const Quizzes = () => {
                                     )}
                                 </Card.Title>
                                 <Card.Text className="flex-grow-1">{quiz.description}</Card.Text>
-                                <div className="mt-auto text-center"> {/* Thêm class text-center để căn giữa nội dung */}
+                                <div className="mt-auto"> {/* Thêm class text-center để căn giữa nội dung */}
                                     {quiz.price === 0 || purchasedQuizzes[quiz._id] ? (
                                         <Button
                                             variant="primary"

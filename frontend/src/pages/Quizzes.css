@@ -1,68 +1,37 @@
+/* Container chính chứa các quizzes */
 .quizzes-container {
-    background-color: #f8f9fa; /* Màu nền sáng hơn */
-    padding: 40px 20px; /* Thêm padding cho toàn bộ trang */
+    background-color: #f8f9fa;
+    padding: 40px 20px;
 }
 
+/* Tiêu đề */
 h2 {
-    color: #007bff; /* Màu xanh chính cho tiêu đề */
-    margin-bottom: 20px; /* Thêm khoảng cách dưới tiêu đề */
+    color: #007bff;
+    margin-bottom: 20px;
 }
 
+/* Card của quiz */
 .quiz-card {
-    border: none; /* Bỏ viền cho thẻ card */
-    border-radius: 8px; /* Bo góc cho thẻ card */
-    transition: transform 0.2s, box-shadow 0.2s; /* Hiệu ứng chuyển tiếp */
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Hover trên thẻ quiz */
 .quiz-card:hover {
-    transform: translateY(-5px); /* Di chuyển nhẹ khi hover */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Hiệu ứng bóng đổ khi hover */
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    outline: 2px solid #0059ffcc;
+    outline-offset: -4px;
 }
 
-.btn {
-    font-weight: 500; /* Giảm độ đậm của chữ */
-    padding: 5px 15px; /* Điều chỉnh kích thước padding */
-    font-size: 0.875rem; /* Giảm kích thước font */
-    border-radius: 5px; /* Bo góc nhẹ cho nút */
-    transition: background-color 0.3s, transform 0.2s; /* Thêm hiệu ứng khi hover */
+/* Nút chung */
+.quiz-button {
+    font-weight: 500;
+    padding: 10px 15px;
+    font-size: 0.875rem;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
-.btn-primary {
-    background-color: #007bff; /* Màu xanh chính */
-    border: none;
-}
-
-.btn-primary:hover {
-    background-color: #0056b3; /* Màu xanh đậm khi hover */
-    transform: scale(1.05); /* Tăng kích thước nhẹ khi hover */
-}
-
-.btn-success {
-    background-color: #28a745; /* Màu xanh lá cho nút mua */
-    border: none;
-}
-
-.btn-success:hover {
-    background-color: #218838; /* Màu xanh lá đậm khi hover */
-    transform: scale(1.05); /* Tăng kích thước nhẹ khi hover */
-}
-
-.text-center {
-    text-align: center; /* Căn giữa nội dung */
-}
-
-
-.quiz-card {
-    border: none; /* Bỏ viền cho thẻ card */
-    border-radius: 8px; /* Bo góc cho thẻ card */
-    transition: transform 0.2s, box-shadow 0.2s; /* Hiệu ứng chuyển tiếp */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4); /* Tạo bóng nhẹ cho thẻ card */
-}
-
-.quiz-card:hover {
-    transform: translateY(-5px); /* Di chuyển nhẹ khi hover */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Tăng bóng khi hover */
-    /* Hiệu ứng glow */
-    outline: 4px solid rgba(111, 150, 221, 0.8); /* Viền sáng vàng */
-    outline-offset: -4px; /* Đẩy viền vào bên trong để tạo hiệu ứng glow */
-}

@@ -38,3 +38,24 @@
     font-size: 1.1rem;
     margin-bottom: 10px;
 }
+
+/* CSS cho phần thông báo chúc mừng hoặc thất bại */
+.congratulations-message {
+    font-size: 1.5rem;
+    color: green;
+    font-weight: bold;
+    margin-top: 10px;
+    animation: glow 2s infinite;
+}
+
+.failed-message {
+    font-size: 1.5rem;
+    color: red;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+@keyframes glow {
+    0% { text-shadow: 0 0 5px #0f0, 0 0 10px #0f0, 0 0 15px #0f0, 0 0 20px #00ff00; }
+    100% { text-shadow: 0 0 20px #0f0, 0 0 30px #0f0, 0 0 40px #0f0, 0 0 50px #00ff00; }
+}

@@ -1,34 +1,82 @@
+/* Container chính chứa các quizzes */
 .exam-page-container {
     background-color: #f8f9fa;
-  }
-  
-  .quiz-card {
-    transition: transform 0.2s, box-shadow 0.2s;
+    padding: 40px 20px;
+}
+
+/* Tiêu đề */
+.exam-page-container h3 {
+    color: #007bff;
+    margin-bottom: 20px;
+    font-size: 2rem;
+}
+
+/* Card của quiz */
+.exam-quiz-card {
     border: none;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .quiz-card:hover {
+    border-radius: 8px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Hover trên thẻ quiz với hiệu ứng glow */
+.exam-quiz-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-  }
-  
-  .quiz-card .card-title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #343a40;
-  }
-  
-  .quiz-card .card-text {
-    color: #6c757d;
-  }
-  
-  .quiz-card .btn {
-    border-radius: 25px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2), 
+                0 0 15px rgba(0, 89, 255, 0.7), 
+                0 0 30px rgba(0, 89, 255, 0.5);
+    outline: 2px solid rgba(0, 89, 255, 0.8);
+    outline-offset: -4px;
+}
+
+/* Nút chung */
+.exam-button {
     font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    padding: 10px 20px;
-  }
+    padding: 10px 15px;
+    font-size: 0.875rem;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+/* Nút primary */
+.exam-button-primary {
+    background-color: #007bff;
+    border: none;
+}
+
+.exam-button-primary:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+/* Nút success */
+.exam-button-success {
+    background-color: #28a745;
+    border: none;
+}
+
+.exam-button-success:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+}
+
+/* Căn giữa văn bản */
+.exam-text-center {
+    text-align: center;
+}
+
+/* Khoảng cách giữa các phần tử trên màn hình lớn và nhỏ */
+@media (max-width: 768px) {
+    .exam-page-container {
+        padding: 20px 10px;
+    }
+
+    .exam-quiz-card {
+        padding: 15px;
+    }
+
+    .exam-button {
+        font-size: 0.8rem;
+        padding: 8px 12px;
+    }
+}

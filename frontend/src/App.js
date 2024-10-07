@@ -3,7 +3,6 @@ import { Route, Routes } from 'react-router-dom';
 import Login from './pages/Auth/Login';
 import Register from './pages/Auth/Register';
 import QuizDetail from './components/Quiz/QuizDetail';
-import AllQuestions from './components/Quiz/AllQuestions';
 import HomePage from './pages/HomePage';
 import Profile from './pages/Profile';
 import Header from './components/Header';
@@ -35,7 +34,6 @@ const App = () => {
                     <Route element={<ProtectedRoute />}>
                         <Route path="/quizzes" element={<Quizzes />} />
                         <Route path="/quizz/:id" element={<QuizDetail />} />
-                        <Route path="/questions" element={<AllQuestions />} />
                         <Route path="/profile" element={<Profile />} />
                         <Route path="/payment/success" element={<PaymentSuccessPage />} />
                         <Route path="/practice-exam" element={<ExamPage />} />

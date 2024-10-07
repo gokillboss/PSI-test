@@ -70,6 +70,11 @@
     background-color: #f8f9fa;
 }
 
+.fixed-height-card {
+    height: 500px;
+    overflow-y: unset;
+}
+
 .question-card .card-title {
     font-weight: bold;
     font-size: 1.5rem;
@@ -90,7 +95,4 @@
     background-color: #0056b3;
 }
 
-.btn-danger {
-    background-color: #dc3545;
-    border-color: #dc3545;
-}
+
