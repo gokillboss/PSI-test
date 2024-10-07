@@ -1,91 +1,96 @@
-/* Lưới chứa các ô câu hỏi */
+
 .question-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 3px; /* Khoảng cách giữa các ô */
+    gap: 3px; 
     margin-top: 20px;
     justify-content: center;
-  }
-  
-  /* Ô vuông đại diện cho câu hỏi */
-  .question-grid .question-button {
+}
+
+/* Ô vuông đại diện cho câu hỏi */
+.question-grid .question-button {
     width: 30px; 
     height: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 8px;
+    border-radius: 5px;
     font-size: 1rem;
     color: white;
     padding: 0;
     position: relative;
     cursor: pointer;
     transition: transform 0.2s ease, background-color 0.3s ease;
-  }
-  
-  /* Hiệu ứng hover */
-  .question-grid .question-button:hover {
-    transform: scale(1.1); /* Phóng to nhẹ khi hover */
-  }
-  
-  /* Màu sắc cho ô đã trả lời */
-  .question-grid .question-button.answered {
-    background-color: #28a745; /* Màu xanh lục nhạt */
-    border: 2px solid #218838;
-  }
-  
-  /* Màu sắc cho ô chưa trả lời */
-  .question-grid .question-button.not-answered {
-    background-color: #f0db66; /* Màu vàng nhạt */
+}
+
+
+.question-grid .question-button:hover {
+    transform: scale(1.1); 
+    box-shadow: 0 0 15px rgba(219, 163, 7, 0.8);
+}
+
+
+
+.question-grid .question-button.answered-not-current {
+    background-color: #2fcaf5; /* Màu xanh da trời */
+    border: 2px solid #1212e6; /* Viền màu xanh đậm hơn */
+}
+
+
+/* Màu sắc cho ô chưa trả lời */
+.question-grid .question-button.not-answered {
+    background-color: #f0db66; 
     color: black;
-    /* border: 2px solid #0c0c0c; */
-  }
-  
-  /* Biểu tượng cờ */
-  .question-grid .flag-icon {
+}
+
+
+/* Màu sắc cho ô hiện tại */
+.question-grid .question-button.current {
+    
+    border: 2px solid #04af4e; /* Màu xanh đậm hơn cho viền */
+    color: #04af4e;
+    box-shadow: 0 0 15px #20e441cc;
+    transform: scale(1.1); /* Phóng to ô hiện tại */
+}
+
+/* Biểu tượng cờ */
+.question-grid .flag-icon {
     position: absolute;
     top: -5px;
     right: -5px;
     color: red;
     font-size: 1.2rem;
-  }
-  
-  /* Hiển thị tổng thể của card câu hỏi */
-  .question-card {
+}
+
+/* Hiển thị tổng thể của card câu hỏi */
+.question-card {
     border: none;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     background-color: #f8f9fa;
-  }
-  
-  .question-card .card-title {
+}
+
+.question-card .card-title {
     font-weight: bold;
     font-size: 1.5rem;
-  }
-  
-  .question-card .card-text {
+}
+
+.question-card .card-text {
     font-size: 1.1rem;
-  }
-  
-  /* Nút hành động */
-  .btn-primary {
+}
+
+/* Nút hành động */
+.btn-primary {
     background-color: #007bff;
     border-color: #007bff;
     transition: background-color 0.3s ease;
-  }
-  
-  .btn-primary:hover {
+}
+
+.btn-primary:hover {
     background-color: #0056b3;
-  }
-  
-  /* .btn-warning {
-    background-color: #c0bcaf;
-    border-color: #ffc107;
-    color: black;
-  }
-   */
-  .btn-danger {
+}
+
+.btn-danger {
     background-color: #dc3545;
     border-color: #dc3545;
-  }
-  
+}

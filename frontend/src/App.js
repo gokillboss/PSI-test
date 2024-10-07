@@ -4,7 +4,6 @@ import Login from './pages/Auth/Login';
 import Register from './pages/Auth/Register';
 import QuizDetail from './components/Quiz/QuizDetail';
 import AllQuestions from './components/Quiz/AllQuestions';
-import QuizResult from './components/Quiz/QuizResult';
 import HomePage from './pages/HomePage';
 import Profile from './pages/Profile';
 import Header from './components/Header';
@@ -37,7 +36,6 @@ const App = () => {
                         <Route path="/quizzes" element={<Quizzes />} />
                         <Route path="/quizz/:id" element={<QuizDetail />} />
                         <Route path="/questions" element={<AllQuestions />} />
-                        <Route path="/results/:id" element={<QuizResult />} />
                         <Route path="/profile" element={<Profile />} />
                         <Route path="/payment/success" element={<PaymentSuccessPage />} />
                         <Route path="/practice-exam" element={<ExamPage />} />
