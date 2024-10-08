@@ -140,7 +140,7 @@ const Exam = () => {
 
 
             <Modal show={showResults} onHide={handleRetakeTest} centered>
-                <Modal.Header closeButton>
+                <Modal.Header>
                     <Modal.Title>Kết Quả Thi</Modal.Title>
                 </Modal.Header>
                 <Modal.Body className="text-center">

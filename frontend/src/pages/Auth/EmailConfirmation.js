@@ -22,6 +22,7 @@ const EmailConfirmation = () => {
       }
     };
     verifyEmail();
+    console.log('token:', token);
   }, [token]);
 
   const renderContent = () => {

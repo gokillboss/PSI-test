@@ -190,7 +190,7 @@ exports.handleStripeWebhook = async (req, res) => {
                 // Cập nhật người dùng trở thành Premium
                 const user = await User.findById(session.metadata.userId);
                 if (user) {
-                    user.isPrimium = true; // Cập nhật trạng thái Primium
+                    user.isPremium = true; // Cập nhật trạng thái Premium
                     await user.save();
                     console.log('User upgraded to Premium');
                 } else {

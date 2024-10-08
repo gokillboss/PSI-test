@@ -26,20 +26,19 @@ const App = () => {
             <Header />
             <Container className="flex-grow-1 mt-3">
                 <Routes>
-
                     <Route path="/" element={<HomePage />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/confirm/:token" element={<EmailConfirmation />} />
                     <Route element={<ProtectedRoute />}>
                         <Route path="/quizzes" element={<Quizzes />} />
-                        <Route path="/quizz/:id" element={<QuizDetail />} />
+                        <Route path="/quizzes/:id" element={<QuizDetail />} />
                         <Route path="/profile" element={<Profile />} />
                         <Route path="/payment/success" element={<PaymentSuccessPage />} />
                         <Route path="/practice-exam" element={<ExamPage />} />
                         <Route path="/exam/:id" element={<Exam />} />
                     </Route>
-                    <Route path='/findPassword' element={<FindPassword />} />
+                    <Route path='/find-password' element={<FindPassword />} />
                     <Route path='/resetPassword/:token' element={<ResetPassword />} />
                     <Route path='/terms-of-service' element={<TermsOfService />} />
                 </Routes>
