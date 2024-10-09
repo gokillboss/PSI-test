@@ -39,7 +39,7 @@ const Header = () => {
                 <Nav.Link as={Link} to="/quizzes" className="custom-link mx-2">
                   <Clipboard className="me-1" /> Đề Thi
                 </Nav.Link>
-                <Nav.Link as={Link} to="/practice-exam" className="custom-link mx-2">
+                <Nav.Link as={Link} to="/exam" className="custom-link mx-2">
                   <PencilSquare className="me-1" /> Thi Thử
                 </Nav.Link>
                 <Nav.Link as={Link} to="/profile" className="custom-link mx-2">

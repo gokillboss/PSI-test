@@ -38,7 +38,7 @@ const Quizzes = () => {
     }, [fetchQuizzes]);
 
     const handleStartTest = (id) => {
-        navigate(`/quizz/${id}`);
+        navigate(`/quizzes/${id}`);
     };
 
     const handlePayment = async (id) => {

@@ -66,7 +66,7 @@ const Login = () => {
                         </Form>
 
                         <div className="d-flex justify-content-between mt-3">
-                            <Link to="/findPassword" className="text-decoration-none">
+                            <Link to="/find-password" className="text-decoration-none">
                                 Quên mật khẩu?
                             </Link>
                             <Link to="/register" className="text-decoration-none">
