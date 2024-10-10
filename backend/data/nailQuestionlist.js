@@ -126,10 +126,10 @@ const nailQuestions = [
     {
         questionText: 'Có 2 loại miễn dịch là tự nhiên và:',
         options: [
-            { text: 'Mắc phải', isCorrect: true },
+            { text: 'Mắc phải', isCorrect: false },
             { text: 'Lây nhiễm', isCorrect: false },
             { text: 'Miễn nhiễm', isCorrect: false },
-            { text: 'Nhân tạo', isCorrect: false }
+            { text: 'Nhân tạo', isCorrect: true }
         ],
         category: 1,
         

@@ -52,7 +52,7 @@ const ExamPage = () => {
     };
 
     const handleStartTest = (id) => {
-        navigate(`/Exam/${id}`);
+        navigate(`/exam/${id}`);
     };
 
     return (

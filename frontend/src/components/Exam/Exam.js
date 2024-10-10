@@ -87,7 +87,7 @@ const Exam = () => {
     };
 
     const handleRetakeTest = () => {
-        navigate(`/Exam`);
+        navigate(`/exam`);
         // setCurrentQuestion(1);
         // setAnswers({});
         // setMarkedQuestions([]);
