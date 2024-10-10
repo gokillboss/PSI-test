@@ -14,10 +14,7 @@ const PaymentSuccessPage = () => {
 
         // Update the backend to grant access to the quiz and save payment details
         if (sessionId) {
-
-            console.log("Payment successful! Session ID:", sessionId);
-
-
+            console.log("Payment successful! Session ID:", sessionId)
         }
     }, []);
 

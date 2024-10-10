@@ -32,8 +32,8 @@
 
 
 .question-grid .question-button.answered-not-current {
-    background-color: #2fcaf5; /* Màu xanh da trời */
-    border: 2px solid #1212e6; /* Viền màu xanh đậm hơn */
+    background-color: #2fcaf5;
+    border: 2px solid #1212e6; 
 }
 
 
@@ -47,10 +47,10 @@
 /* Màu sắc cho ô hiện tại */
 .question-grid .question-button.current {
     
-    border: 2px solid #04af4e; /* Màu xanh đậm hơn cho viền */
+    border: 2px solid #04af4e; 
     color: #04af4e;
     box-shadow: 0 0 15px #20e441cc;
-    transform: scale(1.1); /* Phóng to ô hiện tại */
+    transform: scale(1.1);
 }
 
 /* Biểu tượng cờ */

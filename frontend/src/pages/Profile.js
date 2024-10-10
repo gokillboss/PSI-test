@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Button, Spinner, Form } from "react-bootstrap";
 import { PencilSquare } from "react-bootstrap-icons";
 import { getUserProfile, updateUserProfile } from "../services/api";
-import ChangePassword from "../components/ChangePassword"; // Import the ChangePassword component
+import ChangePassword from "../components/ChangePassword"; 
 import "./profile.css";
 
 const Profile = () => {

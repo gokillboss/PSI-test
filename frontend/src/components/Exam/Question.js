@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Button, Container, Row, Col, Form, Card, ProgressBar } from "react-bootstrap";
-import { FlagFill, Flag } from 'react-bootstrap-icons'; // Importing FlagFill and Flag icons
+import { FlagFill, Flag } from 'react-bootstrap-icons';
 import CountdownClock from "./CountdownClock";
-import './Question.css'; // Assuming you have CSS for the question styles
+import './Question.css';
 
 const Question = ({
     question, onNext, onBack, onMark, totalQuestions, handleAnswer,
@@ -124,7 +124,7 @@ const Question = ({
                                 <Col className="d-flex justify-content-center">
                                     <div
                                         onClick={() => !isReview && onMark(currentQuestion)} // Disable onClick when in review mode
-                                        style={{ cursor: isReview ? 'default' : 'pointer' }} // Change cursor to default in review mode
+                                        style={{ cursor: isReview ? 'default' : 'pointer' }} 
                                     >
                                         {markedQuestions.includes(currentQuestion) ? (
                                             <FlagFill color="red" size={30} />

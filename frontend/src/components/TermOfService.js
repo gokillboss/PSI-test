@@ -1,12 +1,12 @@
 import React from 'react';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';  // Import useNavigate từ react-router-dom
+import { useNavigate } from 'react-router-dom'; 
 import './TermOfService.css';
 
 const TermsOfService = () => {
-  const navigate = useNavigate();  // Khởi tạo useNavigate để điều hướng
+  const navigate = useNavigate(); 
 
-  // Hàm để quay lại trang trước
+ 
   const handleContinue = () => {
     navigate(-1);  // Điều hướng về trang trước
   };

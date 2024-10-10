@@ -21,14 +21,7 @@
     margin-bottom: 0;
   }
   
-  /* .edit-button {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    color: #ffffff;
-    text-decoration: underline;
-  }
-   */
+  
   .edit-button:disabled {
     opacity: 0.5;
     cursor: not-allowed;
