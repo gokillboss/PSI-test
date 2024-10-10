@@ -35,7 +35,7 @@ const App = () => {
                         <Route path="/quizzes/:id" element={<QuizDetail />} />
                         <Route path="/profile" element={<Profile />} />
                         <Route path="/payment/success" element={<PaymentSuccessPage />} />
-                        <Route path="/practice-exam" element={<ExamPage />} />
+                        <Route path="/exam" element={<ExamPage />} />
                         <Route path="/exam/:id" element={<Exam />} />
                     </Route>
                     <Route path='/find-password' element={<FindPassword />} />

@@ -3,6 +3,7 @@ import Question from './Question';
 import { Container, Row, Col, Button, Modal, Card } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import { getQuiz } from '../../services/api';
+import { useNavigate } from 'react-router-dom';
 import './Exam.css';
 
 const Exam = () => {
@@ -17,6 +18,7 @@ const Exam = () => {
     const [passStatus, setPassStatus] = useState(false);
     const [isReset, setIsReset] = useState(false);
     const [isReview, setIsReview] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchQuiz = async () => {
@@ -85,12 +87,13 @@ const Exam = () => {
     };
 
     const handleRetakeTest = () => {
-        setCurrentQuestion(1);
-        setAnswers({});
-        setMarkedQuestions([]);
-        setShowResults(false);
-        setIsReset(true);
-        setIsReview(false); // Disable review mode when retaking the test
+        navigate(`/Exam`);
+        // setCurrentQuestion(1);
+        // setAnswers({});
+        // setMarkedQuestions([]);
+        // setShowResults(false);
+        // setIsReset(true);
+        // setIsReview(false); // Disable review mode when retaking the test
     };
 
     const handleReviewTest = () => {
